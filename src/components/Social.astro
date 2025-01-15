@@ -1,0 +1,25 @@
+---
+import Link from "./ui/Link.astro";
+import IconLinkedIn from "../Icons/IconLinkedIn.astro";
+import IconGitHub from "../Icons/IconGithub.astro"
+import IconInstagram from "../Icons/IconInstagram.astro"
+
+interface Props {
+  className?: string;  
+}
+
+const { className = '' } = Astro.props
+
+---
+
+<div class={`social flex flex-row gap-2 sm:mb-0 ${className}`}>
+  <Link href="https://www.linkedin.com/in/nestor-ignacio-rojas-guarachi-998916267/" className="hover:scale-125"> 
+    <IconLinkedIn />
+  </Link>
+  <Link href="https://github.com/ignaccio7" className="hover:scale-125">
+    <IconGitHub />
+  </Link>
+  <Link href="https://www.instagram.com/nirojas1/?hl=es" className="hover:scale-125">
+    <IconInstagram />
+  </Link>
+</div>

@@ -1,0 +1,116 @@
+---
+import Section from "../components/Section.astro";
+import Title from "../components/Title.astro";
+import Button from "../components/ui/Button.astro";
+---
+
+<Section section="footer" tag="footer">
+  <footer>
+    <Title title="Contacto" className="" />
+    <form action="">
+      <div class="group">
+        <label for="name">
+          <input type="text" name="name" id="name" required placeholder=" " />
+          <span>Nombre Completo</span>
+        </label>
+        <label for="phone">
+          <input type="tel" name="phone" id="phone" required placeholder=" " />
+          <span>Telefono</span>
+        </label>
+      </div>
+      <label for="email">
+        <input type="email" name="email" id="email" required placeholder=" " />
+        <span>Correo Electrónico</span>
+      </label>
+      <label for="message">
+        <textarea name="message" id="message" required placeholder=" "/>
+        <span>Mensaje</span>
+      </label>
+      <Button className="w-full max-w-60 py-1" type="submit">
+        Enviar
+      </Button>
+    </form>
+  </footer>
+</Section>
+
+<style>
+  form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 768px;
+  }
+
+  form textarea {
+    resize: none;    
+  }
+
+  form label {
+    width: 100%;
+    height: auto;
+    position: relative;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    overflow: hidden;
+
+    & span {
+      position: absolute;
+      padding-left: 2ch;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      place-content: center;
+      z-index: 10;
+      color: var(--color-gray);
+      transition: left 0.25s ease-in-out;
+      white-space: nowrap;
+    }
+
+    input {
+      width: 100%;
+      overflow: hidden;
+    }
+
+    & input, textarea {
+      flex-grow: 1;
+      color: var(--color-black);
+      padding: 5px;
+      display: flex;
+      align-items: center;
+      border: 0;
+      outline: 0;
+      transition: left 0.3s ease-out;
+
+      &:focus + span,
+      &:not(:placeholder-shown) + span,
+      &:valid + span {
+        left: 100%;
+      }
+    }
+
+    &::before {
+      content: "<";
+      z-index: 10;
+    }
+    &::after {
+      content: "/>";
+      z-index: 10;
+    }
+  }
+
+  form .group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  @media (min-width: 768px) {
+    form .group {
+      flex-wrap: nowrap;
+      gap: .5rem;
+    }
+  }
+
+</style>

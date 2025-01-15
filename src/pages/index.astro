@@ -1,0 +1,17 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Section from "../components/Section.astro";
+import Doctype from "../sections/Doctype.astro";
+import Head from "../sections/Head.astro";
+import Body from "../sections/Body.astro";
+import Footer from "../sections/Footer.astro";
+---
+
+<Layout>
+	<Doctype />
+	<Section section="html" tag="html" className="flex flex-col gap-8 !py-12 !px-4 md:!px-8">
+		<Head />
+		<Body />
+		<Footer />
+	</Section>
+</Layout>

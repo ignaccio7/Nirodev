@@ -1,0 +1,63 @@
+---
+import type { GetStaticPaths } from "astro";
+import Layout from "../layouts/Layout.astro";
+
+interface Experience {
+  initialDate: string;
+  endDate: string;
+  company: string;
+  position: string;
+  description: string;
+  url?: string; // Opcional
+  code?: string; // Opcional
+  slug: string;
+}
+
+const experience: Experience[] = [
+  {
+    initialDate: "2024-07-08",
+    endDate: "2024-12-13",
+    company: "Facultad de Humanidades y Ciencias de la Educación",
+    position: "FrontEnd Developer",
+    description:
+      "Desarrollo Frontend en Vuejs3, Web Services, implementación de contenedores Docker y Refactorización de nueva interfaz para el modulo de inicio Sistema Web EGOVF",
+    url: "https://svfhce.umsa.bo/",
+    code: "https://github.com/tic-fhce/egovf",
+    slug: "egovf",
+  },
+];
+
+export const getStaticPaths = (() => {
+  const experience = [
+    { params: { slug: "egovf" } },
+    { params: { slug: "google" } },
+  ];
+
+  return experience;
+}) satisfies GetStaticPaths;
+
+const { slug } = Astro.params;
+const project = experience.find((exp) => {
+  return exp.slug === slug;
+});
+
+console.log(project);
+---
+
+<Layout>
+  <header>
+    <h1>NIRODEV</h1>
+    <button onclick="window.history.back()" id="back">Volver</button>
+  </header>
+  <article>
+    <h2 transition:name="title-experience" class="font-semibold">
+      {project?.company} -
+      <span class="font-normal text-[var(--color-section)]"
+        >{project?.position}</span
+      >
+    </h2>
+    <p transition:name="description-experience" class="text-pretty text-_step1">
+      {project?.description}
+    </p>
+  </article>
+</Layout>

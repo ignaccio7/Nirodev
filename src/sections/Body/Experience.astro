@@ -1,0 +1,35 @@
+---
+
+import CardExperience from "../../components/html/body/CardExperience.astro";
+import Title from "../../components/Title.astro";
+
+const experience = [
+  {
+    initialDate: "2024-07-08",
+    endDate: "2024-12-13",
+    company: "Facultad de Humanidades y Ciencias de la Educación",
+    position: "FrontEnd Developer",
+    description: "Desarrollo Frontend en Vuejs3, Web Services, implementación de contenedores Docker y Refactorización de nueva interfaz para el modulo de inicio Sistema Web EGOVF",
+    url: 'https://svfhce.umsa.bo/',
+    code: 'https://github.com/tic-fhce/egovf',
+    slug: 'egovf'
+  },
+  // {
+  //   initialDate: "2024-07-08",
+  //   endDate: "2024-12-24",
+  //   company: "Facebook",
+  //   position: "Ingeniero de Software",
+  //   description: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit laborum."    
+  // },  
+]
+
+---
+
+<Title title="Mi experiencia" className="mb-4"/>
+<section class="flex flex-col gap-4">
+  {
+    experience.map((exp) => {
+      return <CardExperience {...exp} />
+    })
+  }
+</section>

@@ -1,0 +1,79 @@
+---
+import Section from "../components/Section.astro";
+import Title from "../components/Title.astro";
+import Emphasis from "../components/Emphasis.astro"
+import Social from "../components/Social.astro";
+import Button from "../components/ui/Button.astro";
+
+---
+<Section section="head" tag="head" className="flex flex-col sm:gap-4 md:flex-row md:items-center flex-wrap">
+  <div class="content flex-shrink-0 mb-4 sm:mb-0 sm:basis-[320px] flex-grow flex flex-col gap-2">
+    <header class="flex flex-row justify-between items-center flex-wrap">
+      <Title title="Acerca de mi" className="mr-2" />
+      <Social className="hidden sm:flex sm:flex-row sm:gap-2 sm:mb-0" />      
+    </header>    
+    <p class="text-pretty text-step_-1">
+    <span class="hidden sm:inline-block">Hola, mi nombre es <Emphasis content="Nestor Rojas"/>.</span>
+    Actualmente soy <Emphasis content="Tenico Superior" /> en <Emphasis content="Sistemas Informaticos"/> y estudiante de la carrera de <Emphasis content="Informática" />. Me apasiona el <Emphasis content="diseño y desarrollo web" />. Disfruto de construir y replicar sitios, además me gusta aprender nuevas tecnologías y compartir mis conocimientos con la comunidad.</p>
+    <Button className="hidden sm:block px-0 py-0" color="head">
+      <a 
+        href="https://drive.google.com/file/d/14GO20o0DCBwz397RKIjNtrzHiKorvtAZ/view" 
+        class="block w-full h-full !px-4 !py-1"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Descarga mi curriculum
+      </a>
+    </Button>
+  </div>
+  <figure class="w-full min-w-[250px] max-w-64 rounded-md">
+    <img src="https://unavatar.io/github/ignaccio7" alt="Avatar" />
+    <div></div>
+  </figure>  
+</Section>
+
+<style>
+  p {
+    flex-grow: 1;
+  }
+  figure {    
+    width: 100%;    
+    height: auto;
+    aspect-ratio: 1 / 1;
+    position: relative;
+  }
+  figure img {
+    display: block;
+    width: 90%;
+    height: auto;
+    position: absolute;
+    z-index: 20;
+    left: 0;
+    top: 0;
+    transition: all .3s ease;
+  }
+
+  figure div {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: var(--color-gray);
+    width: 90%;
+    height: 90%;
+    z-index: 10;
+    transition: all .3s ease;
+  }
+
+  figure:hover div {
+    width: 100%;
+    height: 100%;
+  }
+
+  figure:hover img {
+    left: 5%;
+    top: 5%;
+
+  }
+
+</style>

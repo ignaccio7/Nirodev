@@ -1,0 +1,113 @@
+---
+import IconGithub from "../../../Icons/IconGithub.astro";
+import IconGoToPage from "../../../Icons/IconGoToPage.astro";
+import IconProject from "../../../Icons/IconProject.astro";
+import Link from "../../ui/Link.astro";
+interface Props {
+  className?: string;
+  title: string;
+  description: string;
+  url: string;
+  image: string;
+}
+
+const { className = "", title, description, url, image } = Astro.props;
+---
+
+<article
+  class={`cardProject grid grid-cols-1 gap-4 p-4 border border-[var(--color-gray)] ${className}`}
+>
+  <header
+    class="flex flex-row gap-1 items-center text-step-_1 leading-none text-[var(--color-html)] font-bold"
+  >
+    <small><IconProject /></small>
+    <h2>{title}</h2>
+  </header>
+  <div class="body">
+    <p class="text-_step1 line-clamp-4 mb-4">{description}</p>
+    <picture>
+      <img
+        class="w-full h-auto aspect-video"
+        src={image}
+        alt={`Image of ${title}`}
+      />
+    </picture>
+  </div>
+  <footer class="flex flex-row flex-wrap gap-2 self-end">
+    <Link href={url} className="hover:text-[var(--color-section)] text-_step1">
+      Sitio <IconGoToPage size="24" />
+    </Link>
+    <Link href={url} className="hover:text-[var(--color-section)] text-_step1">
+      Código <IconGithub size="24" />
+    </Link>
+  </footer>
+</article>
+
+<style>
+  @keyframes entry-top {
+    from {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .cardProject {
+    position: relative;
+    overflow: hidden;
+    --x-px: calc(var(--x) * 1px);
+    --y-px: calc(var(--y) * 1px);
+
+    animation: entry-top linear both;
+    animation-timeline: view();
+    animation-range: entry 10% cover 20%;
+
+    
+  }
+
+  .cardProject::after {
+    content: "";
+    display: block;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 40;
+
+    transition: all 0.5s ease;
+    background: radial-gradient(
+      700px circle at var(--x-px) var(--y-px),
+      rgba(255, 255, 255, 0.2),
+      transparent 50%
+    );
+  }
+
+  .cardProject::after {
+    opacity: 0;
+    z-index: 2;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+
+  .cardProject:hover:after {
+    opacity: 1;
+  }
+</style>
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    const cards = Array.from(document.querySelectorAll(".cardProject"));
+
+    cards.forEach($card => {
+      $card.addEventListener("pointermove", (event) => {
+        const rect = $card.getBoundingClientRect();
+        $card.style.setProperty("--x", String(event.clientX - rect.left));
+        $card.style.setProperty("--y", String(event.clientY - rect.top));
+      });
+    });
+  });
+</script>
+

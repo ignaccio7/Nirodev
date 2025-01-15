@@ -1,0 +1,22 @@
+---
+interface Props {
+  className?: string;
+  color?: string;
+  type?: "button" | "submit" | "reset";
+}
+
+const { color = "head", className = "", type = 'button' } = Astro.props;
+---
+
+<button
+  type={type}
+  class={`    
+  w-fit text-black font-semibold rounded-md px-4 py-2 border-2 
+  hover:bg-black hover:border-white hover:text-white 
+  transition-all duration-500
+  ${className}
+  `}
+  class:list={[{ "bg-white border-white": color === "white" }, { "bg-blueColor border-blueColor" : color === "head" }, { "bg-greenColor border-greenColor" : color === "html" }]}
+>
+  <slot />
+</button>

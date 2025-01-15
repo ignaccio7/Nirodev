@@ -1,0 +1,68 @@
+---
+
+import CardProject from "../../components/html/body/CardProject.astro";
+import Title from "../../components/Title.astro"
+
+const projects = [
+  {
+    id: 1,
+    title: "Maquetación - Ecommerce",
+    description:
+      "Es un ejemplo de maquetación de un ecommerce con HTML y CSS. El sitio esta desarrollado en mobile first y se adapta a la pantalla de todas las resoluciones.",
+    url: "https://ignaccio7.github.io/20ProyectosHTMLCSS/ecommerce/",
+    image: "https://github.com/ignaccio7/my-portfolio/blob/master/public/projects/sitio1.png?raw=true",
+    // tag:IconHTML,
+  },
+  {
+    id: 2,
+    title: "Maquetación - Cafetería",
+    description:
+      "Es un ejemplo de maquetación de un cafetería con HTML y CSS. Se puede apreciar diferentes estilos con el uso de grillas en las diferentes secciones del sitio.",
+    url: "https://ignaccio7.github.io/20ProyectosHTMLCSS/Cafeteria/",
+    image: "https://github.com/ignaccio7/my-portfolio/blob/master/public/projects/sitio2.png?raw=true",
+    // tag:IconHTML,
+  },
+  {
+    id: 3,
+    title: "Maquetación - Nucleus",
+    description:
+      "Es un ejemplo de maquetación de un sitio de Venta de Servicio con HTML y CSS. Se puede apreciar que se uso la metodologia BEM para organizar el código y que se puede apreciar la adaptación del sitio a la pantalla de todas las resoluciones.",
+    url: "https://ignaccio7.github.io/20ProyectosHTMLCSS/Nucleus/",
+    image: "https://github.com/ignaccio7/my-portfolio/blob/master/public/projects/sitio3.png?raw=true",
+    // tag:IconHTML,
+  },
+  {
+    id: 4,
+    title: "Maquetación - Audifonos",
+    description:
+      "Es un ejemplo de maquetación de un sitio de Audifonos con HTML y CSS. Se puede apreciar que se hizo uso de clases utilitarias para la reutilizacion de código y tambien es un sitio que se adapta a la pantalla de todas las resoluciones.",
+    url: "https://ignaccio7.github.io/20ProyectosHTMLCSS/TECHPRO-SitioParaAudifonos/",
+    image: "https://github.com/ignaccio7/my-portfolio/blob/master/public/projects/sitio4.png?raw=true",
+    // tag:IconHTML,
+  },
+  {
+    id: 5,
+    title: "Maquetación - Arquitectura",
+    description:
+      "Es un ejemplo de maquetación de un sitio de Arquitectura con HTML y CSS. Se puede apreciar que se hizo uso de clases utilitarias para la reutilizacion de código y tambien es un sitio que se adapta a la pantalla de todas las resoluciones.",
+    url: "https://ignaccio7.github.io/20ProyectosHTMLCSS/Architecture-SitioDeArquitectura/",
+    image: "https://github.com/ignaccio7/my-portfolio/blob/master/public/projects/sitio5.png?raw=true",
+    // tag:IconHTML,
+  },
+];
+
+---
+
+<section class="mt-4 flex flex-col gap-4">
+  <Title title="Mis proyectos" className="!mb-2" />
+  <p>Estos son algunos de mis proyectos personales que he desarrollado.</p>
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+    {
+      projects.map((project) => {
+        return (
+          <CardProject {...project} />
+        )
+      })
+    }
+  </div>
+</section>
