@@ -8,10 +8,11 @@ interface Props {
   title: string;
   description: string;
   url: string;
+  code:string;
   image: string;
 }
 
-const { className = "", title, description, url, image } = Astro.props;
+const { className = "", title, description, url,code, image } = Astro.props;
 ---
 
 <article
@@ -37,7 +38,7 @@ const { className = "", title, description, url, image } = Astro.props;
     <Link href={url} className="hover:text-[var(--color-section)] text-_step1">
       Sitio <IconGoToPage size="24" />
     </Link>
-    <Link href={url} className="hover:text-[var(--color-section)] text-_step1">
+    <Link href={code} className="hover:text-[var(--color-section)] text-_step1">
       Código <IconGithub size="24" />
     </Link>
   </footer>
@@ -97,8 +98,8 @@ const { className = "", title, description, url, image } = Astro.props;
   }
 </style>
 
-<script is:inline>
-  document.addEventListener("DOMContentLoaded", () => {
+<script type="module">
+  // document.addEventListener("DOMContentLoaded", () => {
     const cards = Array.from(document.querySelectorAll(".cardProject"));
 
     cards.forEach($card => {
@@ -108,6 +109,6 @@ const { className = "", title, description, url, image } = Astro.props;
         $card.style.setProperty("--y", String(event.clientY - rect.top));
       });
     });
-  });
+  // });
 </script>
 

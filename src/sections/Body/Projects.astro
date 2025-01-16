@@ -1,56 +1,97 @@
 ---
-
 import CardProject from "../../components/html/body/CardProject.astro";
-import Title from "../../components/Title.astro"
+import Title from "../../components/Title.astro";
 
 const projects = [
   {
     id: 1,
-    title: "Maquetación - Ecommerce",
+    title: "CashFlow",
     description:
-      "Es un ejemplo de maquetación de un ecommerce con HTML y CSS. El sitio esta desarrollado en mobile first y se adapta a la pantalla de todas las resoluciones.",
-    url: "https://ignaccio7.github.io/20ProyectosHTMLCSS/ecommerce/",
-    image: "https://github.com/ignaccio7/my-portfolio/blob/master/public/projects/sitio1.png?raw=true",
+      "Es un ejemplo con el framwork Vue.js en el cual nosotros podemos ir gestionando el flujo de efectivo que tengamos en el cual tambien nos mostrara un grafico de flujo para ver el progreso de nuestro efectivo.",
+    url: "https://cash-flow-vuejs.netlify.app/",
+    image:
+      "https://github.com/ignaccio7/nirodev/blob/master/public/projects/cashflow.png?raw=true",
+    code: "https://github.com/ignaccio7/VueApuntes/tree/master/01-curso-practico/cash-flow",
     // tag:IconHTML,
   },
   {
     id: 2,
-    title: "Maquetación - Cafetería",
+    title: "DesignPatterns",
     description:
-      "Es un ejemplo de maquetación de un cafetería con HTML y CSS. Se puede apreciar diferentes estilos con el uso de grillas en las diferentes secciones del sitio.",
-    url: "https://ignaccio7.github.io/20ProyectosHTMLCSS/Cafeteria/",
-    image: "https://github.com/ignaccio7/my-portfolio/blob/master/public/projects/sitio2.png?raw=true",
+      "Un pagina web desarrollada con Astro y ViewTransitions en el cual podremos ver los diferentes patrones de diseño que existen en el mundo de desarrollo con descripcion y ejemplos para ver cada uno.",
+    url: "https://ignaccio7.github.io/PatronesDeDisenioJSTS/",
+    image:
+      "https://github.com/ignaccio7/nirodev/blob/master/public/projects/design-patterns.png?raw=true",
+    code: "https://github.com/ignaccio7/PatronesDeDisenioJSTS",
     // tag:IconHTML,
   },
   {
     id: 3,
-    title: "Maquetación - Nucleus",
+    title: "JS-Quiz",
     description:
-      "Es un ejemplo de maquetación de un sitio de Venta de Servicio con HTML y CSS. Se puede apreciar que se uso la metodologia BEM para organizar el código y que se puede apreciar la adaptación del sitio a la pantalla de todas las resoluciones.",
-    url: "https://ignaccio7.github.io/20ProyectosHTMLCSS/Nucleus/",
-    image: "https://github.com/ignaccio7/my-portfolio/blob/master/public/projects/sitio3.png?raw=true",
+      "Una pagina desarrollada con React en el cual podremos probar nuestros conocimientos de JavaScript.",
+    url: "https://rainbow-churros-3ad2a1.netlify.app/",
+    image:
+      "https://github.com/ignaccio7/nirodev/blob/master/public/projects/quiz-js.png?raw=true",
+    code: "https://github.com/ignaccio7/ReactApuntes/tree/master/projects/13-javascript-quiz",
     // tag:IconHTML,
   },
   {
     id: 4,
-    title: "Maquetación - Audifonos",
+    title: "Maquetación - Ecommerce",
     description:
-      "Es un ejemplo de maquetación de un sitio de Audifonos con HTML y CSS. Se puede apreciar que se hizo uso de clases utilitarias para la reutilizacion de código y tambien es un sitio que se adapta a la pantalla de todas las resoluciones.",
-    url: "https://ignaccio7.github.io/20ProyectosHTMLCSS/TECHPRO-SitioParaAudifonos/",
-    image: "https://github.com/ignaccio7/my-portfolio/blob/master/public/projects/sitio4.png?raw=true",
+      "Es un ejemplo de maquetación de un ecommerce con HTML y CSS. El sitio esta desarrollado en mobile first y se adapta a la pantalla de todas las resoluciones.",
+    url: "https://ignaccio7.github.io/20ProyectosHTMLCSS/ecommerce/",
+    image:
+      "https://github.com/ignaccio7/my-portfolio/blob/master/public/projects/sitio1.png?raw=true",
+    code: "https://github.com/ignaccio7/20ProyectosHTMLCSS/tree/master/ecommerce",
     // tag:IconHTML,
   },
   {
     id: 5,
+    title: "Maquetación - Cafetería",
+    description:
+      "Es un ejemplo de maquetación de un cafetería con HTML y CSS. Se puede apreciar diferentes estilos con el uso de grillas en las diferentes secciones del sitio.",
+    url: "https://ignaccio7.github.io/20ProyectosHTMLCSS/Cafeteria/",
+    image:
+      "https://github.com/ignaccio7/my-portfolio/blob/master/public/projects/sitio2.png?raw=true",
+    code: "https://github.com/ignaccio7/20ProyectosHTMLCSS/tree/master/Cafeteria",
+    // tag:IconHTML,
+  },
+  {
+    id: 6,
+    title: "Maquetación - Nucleus",
+    description:
+      "Es un ejemplo de maquetación de un sitio de Venta de Servicio con HTML y CSS. Se puede apreciar que se uso la metodologia BEM para organizar el código y que se puede apreciar la adaptación del sitio a la pantalla de todas las resoluciones.",
+    url: "https://ignaccio7.github.io/20ProyectosHTMLCSS/Nucleus/",
+    image:
+      "https://github.com/ignaccio7/my-portfolio/blob/master/public/projects/sitio3.png?raw=true",
+    code: "https://github.com/ignaccio7/20ProyectosHTMLCSS/tree/master/Nucleus",
+    // tag:IconHTML,
+  },
+  {
+    id: 7,
+    title: "Maquetación - Audifonos",
+    description:
+      "Es un ejemplo de maquetación de un sitio de Audifonos con HTML y CSS. Se puede apreciar que se hizo uso de clases utilitarias para la reutilizacion de código y tambien es un sitio que se adapta a la pantalla de todas las resoluciones.",
+    url: "https://ignaccio7.github.io/20ProyectosHTMLCSS/TECHPRO-SitioParaAudifonos/",
+    image:
+      "https://github.com/ignaccio7/my-portfolio/blob/master/public/projects/sitio4.png?raw=true",
+    code: "https://github.com/ignaccio7/20ProyectosHTMLCSS/tree/master/TECHPRO-SitioParaAudifonos",
+    // tag:IconHTML,
+  },
+  {
+    id: 8,
     title: "Maquetación - Arquitectura",
     description:
       "Es un ejemplo de maquetación de un sitio de Arquitectura con HTML y CSS. Se puede apreciar que se hizo uso de clases utilitarias para la reutilizacion de código y tambien es un sitio que se adapta a la pantalla de todas las resoluciones.",
     url: "https://ignaccio7.github.io/20ProyectosHTMLCSS/Architecture-SitioDeArquitectura/",
-    image: "https://github.com/ignaccio7/my-portfolio/blob/master/public/projects/sitio5.png?raw=true",
+    image:
+      "https://github.com/ignaccio7/my-portfolio/blob/master/public/projects/sitio5.png?raw=true",
+    code: "https://github.com/ignaccio7/20ProyectosHTMLCSS/tree/master/Architecture-SitioDeArquitectura",
     // tag:IconHTML,
   },
 ];
-
 ---
 
 <section class="mt-4 flex flex-col gap-4">
@@ -59,9 +100,7 @@ const projects = [
   <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
     {
       projects.map((project) => {
-        return (
-          <CardProject {...project} />
-        )
+        return <CardProject {...project} />;
       })
     }
   </div>
