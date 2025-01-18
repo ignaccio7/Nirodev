@@ -1,0 +1,33 @@
+
+<div
+  class="toast w-full h-full fixed inset-0 z-20 pointer-events-none transition-transform ease-in-out hide"
+>
+  <div
+    style="--type: --t"
+    class={`max-w-72 rounded-lg px-4 py-3 text-_step2 absolute bottom-2 right-2 z-50
+    bg-gray-500`}
+  >
+    <span class="toastContent">a</span>
+  </div>
+</div>
+
+<style>
+  .hide {
+    transform: translateY(100%);
+  }
+</style>
+
+<script type="module">
+  const $toastContent = document.querySelector("span.toastContent")
+  const $toast = document.querySelector("div.toast")
+
+  window.addEventListener("show-toast", (event) => {
+    const { content = "", type = "info" } = event?.detail || {}
+    $toastContent.textContent = content
+    $toast.classList.remove("hide")
+
+    setTimeout(() => {
+      $toast.classList.add('hide')
+    }, 3000);
+  });
+</script>

@@ -1,4 +1,5 @@
 ---
+import Header from "../components/experience/Header.astro";
 import type { GetStaticPaths } from "astro";
 import Layout from "../layouts/Layout.astro";
 
@@ -8,9 +9,11 @@ interface Experience {
   company: string;
   position: string;
   description: string;
+  detailedDescription: string;
   url?: string; // Opcional
   code?: string; // Opcional
   slug: string;
+  images: Array<{ src: string; alt: string; device: "mobile" | "desktop" }>;
 }
 
 const experience: Experience[] = [
@@ -21,9 +24,43 @@ const experience: Experience[] = [
     position: "FrontEnd Developer",
     description:
       "Desarrollo Frontend en Vuejs3, Web Services, implementación de contenedores Docker y Refactorización de nueva interfaz para el modulo de inicio Sistema Web EGOVF",
+    detailedDescription:
+      "En este rol, llevé a cabo el desarrollo completo del modulo de inicio utilizando Vue.js 3, integrando servicios web para mejorar la funcionalidad del sistema. Se puede destacar el uso de componentes asincronos para la pagina de registro en la cual se tiene 4 diferentes roles para darse de alta (Estudiante, Docente, Administrativo y Persona Externa) en la cual segun sea el formulario solicitado se ira cargando uno y otro asi tambien se implemento validaciones con uso de la libreria Vuelidate para el correcto uso de esto al envio al servidor, y por ultimo realicé una exhaustiva refactorización de la interfaz de usuario para optimizar la experiencia del usuario en el módulo de inicio del Sistema Web EGOVF.",
     url: "https://svfhce.umsa.bo/",
     code: "https://github.com/tic-fhce/egovf",
     slug: "egovf",
+    images: [
+      {
+        src: "/experience/egovf/home-desktop.png",
+        alt: "home-desktop",
+        device: "desktop",
+      },
+      {
+        src: "/experience/egovf/login-desktop.png",
+        alt: "home-desktop",
+        device: "desktop",
+      },
+      {
+        src: "/experience/egovf/login-mobile.png",
+        alt: "home-desktop",
+        device: "mobile",
+      },
+      {
+        src: "/experience/egovf/register-desktop.png",
+        alt: "home-desktop",
+        device: "desktop",
+      },
+      {
+        src: "/experience/egovf/register-mobile.png",
+        alt: "home-desktop",
+        device: "mobile",
+      },
+      {
+        src: "/experience/egovf/slider-desktop.png",
+        alt: "home-desktop",
+        device: "desktop",
+      },
+    ],
   },
 ];
 
@@ -45,19 +82,120 @@ console.log(project);
 ---
 
 <Layout>
-  <header>
-    <h1>NIRODEV</h1>
-    <button onclick="window.history.back()" id="back">Volver</button>
-  </header>
-  <article>
-    <h2 transition:name="title-experience" class="font-semibold">
-      {project?.company} -
-      <span class="font-normal text-[var(--color-section)]"
+  <Header />
+  <article class="flex flex-col gap-2">
+    <h2
+      transition:name="title-experience"
+      class="font-semibold text-2xl text-yellowColor"
+    >
+      {project?.company}
+      <br />
+      <span class="font-normal text-whiteColor text-step0"
         >{project?.position}</span
       >
     </h2>
-    <p transition:name="description-experience" class="text-pretty text-_step1">
+    <p
+      transition:name="description-experience"
+      class="text-pretty text-_step1 font-normal text-gray-400"
+    >
       {project?.description}
     </p>
+    <p class="text-pretty text-_step1 font-normal text-gray-400">
+      {project?.detailedDescription}
+    </p>
+
+    <div class="cardImages">
+      {
+        project?.images.map((image) => {
+          console.log("image");
+          console.log(image);
+          return (
+            <div class={`item ${image.device}`}>
+              <img src={image.src} alt={image.alt} />
+            </div>
+          );
+        })
+      }
+    </div>
   </article>
 </Layout>
+
+<style>
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .cardImages {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(2, 150px);
+    grid-auto-rows: 150px;
+    gap: 10px;
+    /* grid-auto-flow: row dense; */
+  }
+
+  .item {
+    overflow: hidden;
+  }
+
+  .item img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    aspect-ratio: 16 / 9;
+  }
+
+  .item.mobile {
+    grid-row: span 4;
+    grid-column: span 2;
+  }
+
+  .item.desktop {
+    grid-row: span 3;
+    grid-column: span 4;
+  }
+  /* .item:nth-child(3n) {
+    grid-column: span 1;
+    grid-row: span 1;
+  } */
+
+  @media (max-width: 768px) {
+    .cardImages {
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, 150px);
+      grid-auto-rows: 150px;
+      grid-auto-flow: row dense;
+    }
+    .item.mobile {
+      grid-row: span 3;
+      grid-column: span 2;
+    }
+
+    .item.desktop {
+      grid-row: span 3;
+      grid-column: span 4;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .cardImages {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 150px);
+      grid-auto-rows: 150px;
+      grid-auto-flow: row dense;
+    }
+    .item.mobile {
+      grid-row: span 3;
+      grid-column: span 2;
+    }
+
+    .item.desktop {
+      grid-row: span 2;
+      grid-column: span 2;
+    }
+  }
+
+</style>
