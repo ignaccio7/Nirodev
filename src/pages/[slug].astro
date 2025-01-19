@@ -77,7 +77,7 @@ const project = experience.find((exp) => {
   return exp.slug === slug;
 });
 
-console.log(project);
+// console.log(project);
 ---
 
 <Layout>
@@ -106,8 +106,8 @@ console.log(project);
     <div class="cardImages">
       {
         project?.images.map((image) => {
-          console.log("image");
-          console.log(image);
+          //console.log("image");
+          //console.log(image);
           return (
             <div class={`item ${image.device}`}>
               <img src={image.src} alt={image.alt} />
