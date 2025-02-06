@@ -63,13 +63,11 @@ const experience: Experience[] = [
   },
 ];
 
-export const getStaticPaths = (() => {
-  const experience = [
-    { params: { slug: "egovf" } }
-  ];
+export const getStaticPaths = () => {
+  const experience = [{ params: { slug: "egovf" } }];
 
   return experience;
-});
+};
 
 const { slug } = Astro.params;
 const project = experience.find((exp) => {
@@ -116,7 +114,49 @@ const project = experience.find((exp) => {
       }
     </div>
   </article>
+
+  <dialog>
+    <div class="image">
+      <img src="" alt="Imagen" class="w-full h-auto" />
+    </div>
+  </dialog>
 </Layout>
+
+<script type="module">
+  const $ = (selector) => document.querySelector(selector);
+  const $$ = (selector) => document.querySelectorAll(selector);
+
+  const images = $$(".item img");
+
+  const $dialog = $("dialog"),
+    $imgDialog = $dialog.querySelector(".image img");
+
+  function viewImage(image) {
+    $imgDialog.src = image.src;
+    setTimeout(() => {
+      $dialog.showModal();
+    }, 200);
+  }
+
+  function closeImage() {
+    $dialog.close();
+    setTimeout(() => {
+      $imgDialog.src = "";
+    }, 500);
+  }
+
+  images.forEach((image) => {
+    image.addEventListener("click", () => {
+      viewImage(image);
+    });
+  });
+
+  $dialog.addEventListener("click", (event) => {
+    if (event.target === $dialog) {
+      closeImage();
+    }
+  });
+</script>
 
 <style>
   img {
@@ -196,4 +236,47 @@ const project = experience.find((exp) => {
     }
   }
 
+  dialog::backdrop {
+    backdrop-filter: blur(10px);
+  }
+
+  dialog {
+    margin-inline: auto;
+    max-width: 1000px;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition:
+      display 0.5s allow-discrete,
+      overlay 0.5s allow-discrete;
+
+    animation: close 0.5s forwards;
+    &[open] {
+      animation: open 0.5s forwards;
+    }
+  }
+
+  @keyframes open {
+    from {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes close {
+    from {
+      opacity: 1;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+  }
 </style>
