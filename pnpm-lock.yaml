@@ -8,12 +8,18 @@ importers:
 
   .:
     dependencies:
+      '@appnest/masonry-layout':
+        specifier: ^2.2.3
+        version: 2.2.3
       '@astrojs/tailwind':
         specifier: ^5.1.4
         version: 5.1.4(astro@5.1.7(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
       astro:
         specifier: ^5.1.7
         version: 5.1.7(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
+      photoswipe:
+        specifier: ^5.4.4
+        version: 5.4.4
       tailwindcss:
         specifier: ^3.4.17
         version: 3.4.17
@@ -23,6 +29,9 @@ packages:
   '@alloc/quick-lru@5.2.0':
     resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
     engines: {node: '>=10'}
+
+  '@appnest/masonry-layout@2.2.3':
+    resolution: {integrity: sha512-q4q48iygVyaFaaogu5xeYNHR5jj4yZMB4zC1JmfOggz7DPCp/QIJGbnLctf3y2maNtGz4PiLXrQRQlmx5hO57A==}
 
   '@astrojs/compiler@2.10.3':
     resolution: {integrity: sha512-bL/O7YBxsFt55YHU021oL+xz+B/9HvGNId3F9xURN16aeqDK9juHGktdkCSXz+U4nqFACq6ZFvWomOzhV+zfPw==}
@@ -1266,6 +1275,10 @@ packages:
   pathe@1.1.2:
     resolution: {integrity: sha512-whLdWMYL2TwI08hn8/ZqAbrVemu0LNaNNJZX73O6qaIdCTfXutsLhMkjdENX0qhsQ9uIimo4/aQOmXkoon2nDQ==}
 
+  photoswipe@5.4.4:
+    resolution: {integrity: sha512-WNFHoKrkZNnvFFhbHL93WDkW3ifwVOXSW3w1UuZZelSmgXpIGiZSNlZJq37rR8YejqME2rHs9EhH9ZvlvFH2NA==}
+    engines: {node: '>= 0.12.0'}
+
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
 
@@ -1797,6 +1810,8 @@ packages:
 snapshots:
 
   '@alloc/quick-lru@5.2.0': {}
+
+  '@appnest/masonry-layout@2.2.3': {}
 
   '@astrojs/compiler@2.10.3': {}
 
@@ -3222,6 +3237,8 @@ snapshots:
       minipass: 7.1.2
 
   pathe@1.1.2: {}
+
+  photoswipe@5.4.4: {}
 
   picocolors@1.1.1: {}
 

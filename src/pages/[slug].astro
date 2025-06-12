@@ -12,7 +12,13 @@ interface Experience {
   url?: string; // Opcional
   code?: string; // Opcional
   slug: string;
-  images: Array<{ src: string; alt: string; device: "mobile" | "desktop" }>;
+  images: Array<{
+    src: string;
+    alt: string;
+    device: "mobile" | "desktop";
+    width: number;
+    height: number;
+  }>;
 }
 
 const experience: Experience[] = [
@@ -33,31 +39,43 @@ const experience: Experience[] = [
         src: "https://github.com/ignaccio7/Nirodev/blob/master/public/experience/egovf/home-desktop.png?raw=true",
         alt: "home-desktop",
         device: "desktop",
+        height:638 ,
+        width: 1254 ,
       },
       {
         src: "https://github.com/ignaccio7/Nirodev/blob/master/public/experience/egovf/login-desktop.png?raw=true",
         alt: "home-desktop",
         device: "desktop",
+        height:638 ,
+        width: 1254 ,
       },
       {
         src: "https://github.com/ignaccio7/Nirodev/blob/master/public/experience/egovf/login-mobile.png?raw=true",
         alt: "home-desktop",
         device: "mobile",
+        width: 507,
+        height:  894 ,
       },
       {
         src: "https://github.com/ignaccio7/Nirodev/blob/master/public/experience/egovf/register-desktop.png?raw=true",
         alt: "home-desktop",
         device: "desktop",
+        height:638 ,
+        width: 1254 ,
       },
       {
         src: "https://github.com/ignaccio7/Nirodev/blob/master/public/experience/egovf/register-mobile.png?raw=true",
         alt: "home-desktop",
         device: "mobile",
+        width: 507,
+        height:  894 ,
       },
       {
         src: "https://github.com/ignaccio7/Nirodev/blob/master/public/experience/egovf/slider-desktop.png?raw=true",
         alt: "home-desktop",
         device: "desktop",
+        height:638 ,
+        width: 1254 ,
       },
     ],
   },
@@ -100,19 +118,33 @@ const project = experience.find((exp) => {
       {project?.detailedDescription}
     </p>
 
-    <div class="cardImages">
+    <!-- <div class="cardImages"> -->
+    <masonry-layout
+      gap="16"
+      class="gallery pswp-gallery pswp-gallery--single-column"
+      id="gallery"
+    >
       {
         project?.images.map((image) => {
-          //console.log("image");
-          //console.log(image);
+          // console.log("image");
+          // console.log(image);
           return (
-            <div class={`item ${image.device}`}>
-              <img src={image.src} alt={image.alt} />
-            </div>
+             <a
+                href={image.src},
+                class={`w-full h-auto relative hover:scale-105 group transition-all duration-300 ease-in-out rounded-md group
+                `}
+                target="_blank"
+                data-pswp-width={image.width}
+                data-pswp-height={image.height}
+              >
+              <img src={image.src} alt={image.alt} class={`w-full h-full block object-cover ${image.device === "mobile" ? "max-h-[500px]" : ""} object-top`}/>
+              <img src={image.src} alt={image.alt} class={`absolute inset-0 -z-10 w-full h-full block object-cover group-hover:scale-[1.02] blur-sm ${image.device === "mobile" ? "max-h-[500px]" : ""} transition-all duration-300 ease-in-out object-top`}/>
+            </a>
           );
         })
       }
-    </div>
+    </masonry-layout>
+    <!-- </div> -->
   </article>
 
   <dialog>
@@ -122,40 +154,19 @@ const project = experience.find((exp) => {
   </dialog>
 </Layout>
 
-<script type="module">
-  const $ = (selector) => document.querySelector(selector);
-  const $$ = (selector) => document.querySelectorAll(selector);
+<script>
+  import PhotoSwipeLightbox from "photoswipe/lightbox";
+  import "photoswipe/style.css";
+  import "@appnest/masonry-layout";
 
-  const images = $$(".item img");
-
-  const $dialog = $("dialog"),
-    $imgDialog = $dialog.querySelector(".image img");
-
-  function viewImage(image) {
-    $imgDialog.src = image.src;
-    setTimeout(() => {
-      $dialog.showModal();
-    }, 200);
-  }
-
-  function closeImage() {
-    $dialog.close();
-    setTimeout(() => {
-      $imgDialog.src = "";
-    }, 500);
-  }
-
-  images.forEach((image) => {
-    image.addEventListener("click", () => {
-      viewImage(image);
-    });
+  const lightbox = new PhotoSwipeLightbox({
+    gallery: "#gallery",
+    children: "a",
+    pswpModule: () => import("photoswipe"),
   });
+  lightbox.init();
 
-  $dialog.addEventListener("click", (event) => {
-    if (event.target === $dialog) {
-      closeImage();
-    }
-  });
+  document?.querySelector("masonry-layout")?.layout();
 </script>
 
 <style>
