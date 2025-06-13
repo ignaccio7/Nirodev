@@ -36,45 +36,45 @@ const experience: Experience[] = [
     slug: "egovf",
     images: [
       {
-        src: "https://github.com/ignaccio7/Nirodev/blob/master/public/experience/egovf/home-desktop.png?raw=true",
+        src: "/experience/egovf/home-desktop.png",
         alt: "home-desktop",
         device: "desktop",
         height:638 ,
         width: 1254 ,
       },
       {
-        src: "https://github.com/ignaccio7/Nirodev/blob/master/public/experience/egovf/login-desktop.png?raw=true",
+        src: "/experience/egovf/login-desktop.png",
         alt: "home-desktop",
         device: "desktop",
-        height:638 ,
+        height:830 ,
         width: 1254 ,
       },
       {
-        src: "https://github.com/ignaccio7/Nirodev/blob/master/public/experience/egovf/login-mobile.png?raw=true",
+        src: "/experience/egovf/login-mobile.png",
         alt: "home-desktop",
         device: "mobile",
         width: 507,
         height:  894 ,
       },
       {
-        src: "https://github.com/ignaccio7/Nirodev/blob/master/public/experience/egovf/register-desktop.png?raw=true",
+        src: "/experience/egovf/register-desktop.png",
         alt: "home-desktop",
         device: "desktop",
         height:638 ,
         width: 1254 ,
       },
       {
-        src: "https://github.com/ignaccio7/Nirodev/blob/master/public/experience/egovf/register-mobile.png?raw=true",
+        src: "/experience/egovf/register-mobile.png",
         alt: "home-desktop",
         device: "mobile",
         width: 507,
         height:  894 ,
       },
       {
-        src: "https://github.com/ignaccio7/Nirodev/blob/master/public/experience/egovf/slider-desktop.png?raw=true",
+        src: "/experience/egovf/slider-desktop.png",
         alt: "home-desktop",
         device: "desktop",
-        height:638 ,
+        height:700 ,
         width: 1254 ,
       },
     ],
@@ -135,9 +135,11 @@ const project = experience.find((exp) => {
                 `}
                 data-pswp-width={image.width}
                 data-pswp-height={image.height}
+                data-cropped="true" 
+                target="_blank"
               >
-              <img src={image.src} alt={image.alt} class={`w-full h-full block object-cover ${image.device === "mobile" ? "max-h-[500px]" : ""} object-top`}/>
-              <img src={image.src} alt={image.alt} class={`absolute inset-0 -z-10 w-full h-full block object-cover group-hover:scale-[1.02] blur-sm ${image.device === "mobile" ? "max-h-[500px]" : ""} transition-all duration-300 ease-in-out object-top`}/>
+              <img src={image.src} alt={image.alt} class={`w-full h-full block object-cover ${image.device === "mobile" ? "max-h-[500px]" : ""} object-top pointer-events-none`}/>
+              <img src={image.src} alt={image.alt} class={`absolute inset-0 -z-10 w-full h-full block object-cover group-hover:scale-[1.02] blur-sm ${image.device === "mobile" ? "max-h-[500px]" : ""} transition-all duration-300 ease-in-out object-top pointer-events-none`}/>
             </a>
           );
         })
@@ -158,14 +160,18 @@ const project = experience.find((exp) => {
   import "photoswipe/style.css";
   import "@appnest/masonry-layout";
 
-  const lightbox = new PhotoSwipeLightbox({
-    gallery: "#gallery",
-    children: "a",
-    pswpModule: () => import("photoswipe"),
-  });
-  lightbox.init();
+  function initializeSwipeGallery() {
+    const lightbox = new PhotoSwipeLightbox({
+      gallery: "#gallery",
+      children: "a",
+      pswpModule: () => import("photoswipe"),
+    });
+    lightbox.init();
+    document?.querySelector("masonry-layout")?.layout();
+    console.log('lightbox', lightbox);
+  }
 
-  document?.querySelector("masonry-layout")?.layout();
+  document.addEventListener('astro:page-load', initializeSwipeGallery);
 </script>
 
 <style>
