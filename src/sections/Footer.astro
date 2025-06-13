@@ -115,6 +115,8 @@ import Button from "../components/ui/Button.astro";
 </style>
 
 <script type="module">
+  //function initContactForm() {
+  console.log("Inicio formulario")
   const $form = document.querySelector("form");
 
   async function sendEmail(content) {
@@ -128,10 +130,20 @@ import Button from "../components/ui/Button.astro";
             Accept: "application/json",
           },
           body: JSON.stringify(content),
-        },
+        }
       );
 
       if (!response.ok) throw new Error("Ocurrio un error al enviar el correo");
+      // const response = await new Promise((resolve) => {
+      //   setTimeout(()=>{
+      //     resolve({
+      //       json: () => Promise.resolve(JSON.stringify({message: "ok"})),
+      //       ok:true
+      //   })
+      //   },1000)
+      // })
+      // console.log(response);
+      
 
       const data = await response.json();
       return {
@@ -147,29 +159,36 @@ import Button from "../components/ui/Button.astro";
   }
 
   const handleToast = ({ content }) => {
-    const customEvent = new CustomEvent('show-toast', {
-      detail: { content }
-    })
-    window.dispatchEvent(customEvent)
-  }
+    const customEvent = new CustomEvent("show-toast", {
+      detail: { content },
+    });
+    console.log('llamando al toast');
+    
+    window.dispatchEvent(customEvent);
+  };
 
-  const $button = document.querySelector("button[type=submit]")
+  const $button = document.querySelector("button[type=submit]");
 
   $form.addEventListener("submit", async (e) => {
     e.preventDefault();
     // console.log("form");
-    
+
     const form = new FormData(e.target);
     const data = Object.fromEntries(form.entries());
 
-    $button.disabled = true
+    $button.disabled = true;
     const response = await sendEmail(data);
-    const message = response.ok ? "¡Gracias por tu mensaje! Te respondere lo antes posible." : response.message
-    
-    $button.disabled = false
-    e.target.reset()
+    const message = response.ok
+      ? "¡Gracias por tu mensaje! Te respondere lo antes posible."
+      : response.message;
+
+    $button.disabled = false;
+    e.target.reset();
     return handleToast({
-      content: message
-    })
+      content: message,
+    });
   });
+  //}
+
+  //  document.addEventListener("astro:page-load", initContactForm);
 </script>

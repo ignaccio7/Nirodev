@@ -20,16 +20,30 @@
 </style>
 
 <script type="module">
-  const $toastContent = document.querySelector("span.toastContent")
-  const $toast = document.querySelector("div.toast")
+  function handleShowToast(event) {
+    // Buscar elementos dentro del contexto actual
+    const $toastContent = document.querySelector("span.toastContent");
+    const $toast = document.querySelector("div.toast");
+    
+    if (!$toast || !$toastContent) {
+      console.log('Toast elements not found');
+      return;
+    }
 
-  window.addEventListener("show-toast", (event) => {
-    const { content = "", type = "info" } = event?.detail || {}
-    $toastContent.textContent = content
-    $toast.classList.remove("hide")
+    const { content = "", type = "info" } = event?.detail || {};
+    $toastContent.textContent = content;
+    $toast.classList.remove("hide");
 
     setTimeout(() => {
-      $toast.classList.add('hide')
+      if ($toast) { // Verificar que aún existe
+        $toast.classList.add('hide');
+      }
     }, 3000);
-  });
+  }
+
+  // Remover listener anterior si existe
+  window.removeEventListener("show-toast", handleShowToast);
+  // Agregar nuevo listener
+  window.addEventListener("show-toast", handleShowToast);
+
 </script>
