@@ -31,7 +31,7 @@ function formatDate(date: string){
 
 ---
 
-<article class="cardExperience flex flex-col gap-2 pb-4 border-b border-[var(--color-gray)]">
+<article class="cardExperience flex flex-col gap-2 pb-4">
   <header class="text-step0">
     <time class="text-[var(--color-section)] text-_step2" datetime={initialDate}>{ formatDate(initialDate) }</time>
     <span class="text-_step2">al</span>
@@ -50,12 +50,16 @@ function formatDate(date: string){
     { description }
   </p>
   <footer class="flex flex-row gap-2 flex-wrap">
-    <Link href={url} className='hover:text-[var(--color-section)] text-_step1'>
+    {
+      url && (<Link href={url} className='hover:text-[var(--color-section)] text-_step1'>
       Sitio <IconGoToPage size='24' />
-    </Link>
-    <Link href={`/${slug}`} target='_self' className='hover:text-[var(--color-html)] text-_step1'>
+    </Link>)
+    }
+    {
+      slug && (<Link href={`/${slug}`} target='_self' className='hover:text-[var(--color-html)] text-_step1'>
       Ver detalles <IconArrowRight />
-    </Link>
+    </Link>)
+    }
   </footer>
 </article>
 

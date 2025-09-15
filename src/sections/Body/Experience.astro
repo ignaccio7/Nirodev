@@ -5,6 +5,16 @@ import Title from "../../components/Title.astro";
 
 const experience = [
   {
+    initialDate: "2025-02-01",
+    endDate: "2025-08-31",
+    company: "AGETIC",
+    position: "Responsable de DevOps y Automatización de Software",
+    description: "Implementé pruebas de seguridad en sistemas institucionales con Caido y BurpSuite, alineando con estándares OWASP. Desarrollé la plataforma Formix para gestión de formularios con landings informativas y módulos de solicitudes. Integré dashboards estadísticos con Chart.js para visualizar métricas clave. Extendí funcionalidades en APIs NestJS, automatizando actualizaciones con Pulumi. Diseñé nuevos comandos en CLI Go para gestión de volúmenes NFS con Nomad. Implementé pruebas unitarias y refactoricé componentes para mejorar mantenibilidad y escalabilidad.",
+    url: "",
+    code: "",
+    slug: ""
+  },
+  {
     initialDate: "2024-07-08",
     endDate: "2024-12-13",
     company: "Facultad de Humanidades y Ciencias de la Educación",
@@ -13,7 +23,7 @@ const experience = [
     url: 'https://svfhce.umsa.bo/',
     code: 'https://github.com/tic-fhce/egovf',
     slug: 'egovf'
-  },
+  }  
   // {
   //   initialDate: "2024-07-08",
   //   endDate: "2024-12-24",
@@ -26,7 +36,7 @@ const experience = [
 ---
 
 <Title title="Mi experiencia" className="mb-4"/>
-<section class="flex flex-col gap-4">
+<section class="flex flex-col gap-2 border-b border-[var(--color-gray)] pb-2">
   {
     experience.map((exp) => {
       return <CardExperience {...exp} />
