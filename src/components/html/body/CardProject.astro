@@ -8,11 +8,11 @@ interface Props {
   title: string;
   description: string;
   url: string;
-  code:string;
+  code: string;
   image: string;
 }
 
-const { className = "", title, description, url,code, image } = Astro.props;
+const { className = "", title, description, url, code, image } = Astro.props;
 ---
 
 <article
@@ -38,9 +38,16 @@ const { className = "", title, description, url,code, image } = Astro.props;
     <Link href={url} className="hover:text-[var(--color-section)] text-_step1">
       Sitio <IconGoToPage size="24" />
     </Link>
-    <Link href={code} className="hover:text-[var(--color-section)] text-_step1">
-      Código <IconGithub size="24" />
-    </Link>
+    {
+      code !== "" && (
+        <Link
+          href={code}
+          className="hover:text-[var(--color-section)] text-_step1"
+        >
+          Código <IconGithub size="24" />
+        </Link>
+      )
+    }
   </footer>
 </article>
 
@@ -65,8 +72,6 @@ const { className = "", title, description, url,code, image } = Astro.props;
     animation: entry-top linear both;
     animation-timeline: view();
     animation-range: entry 10% cover 20%;
-
-    
   }
 
   .cardProject::after {
@@ -100,15 +105,14 @@ const { className = "", title, description, url,code, image } = Astro.props;
 
 <script type="module">
   // document.addEventListener("DOMContentLoaded", () => {
-    const cards = Array.from(document.querySelectorAll(".cardProject"));
+  const cards = Array.from(document.querySelectorAll(".cardProject"));
 
-    cards.forEach($card => {
-      $card.addEventListener("pointermove", (event) => {
-        const rect = $card.getBoundingClientRect();
-        $card.style.setProperty("--x", String(event.clientX - rect.left));
-        $card.style.setProperty("--y", String(event.clientY - rect.top));
-      });
+  cards.forEach(($card) => {
+    $card.addEventListener("pointermove", (event) => {
+      const rect = $card.getBoundingClientRect();
+      $card.style.setProperty("--x", String(event.clientX - rect.left));
+      $card.style.setProperty("--y", String(event.clientY - rect.top));
     });
+  });
   // });
 </script>
-

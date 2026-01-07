@@ -79,10 +79,114 @@ const experience: Experience[] = [
       },
     ],
   },
+   {
+    initialDate: "2025-02-01",
+    endDate: "2025-08-31",
+    company: "AGETIC",
+    position: "Asistente de DevOps y Automatización de Software",
+    description: "Implementé pruebas de seguridad en sistemas institucionales con Caido y BurpSuite, alineando con estándares OWASP. Desarrollé la plataforma Formix para gestión de formularios con landings informativas y módulos de solicitudes. Integré dashboards estadísticos con Chart.js para visualizar métricas clave. Extendí funcionalidades en APIs NestJS, automatizando actualizaciones con Pulumi. Diseñé nuevos comandos en CLI Go para gestión de volúmenes NFS con Nomad. Implementé pruebas unitarias y refactoricé componentes para mejorar mantenibilidad y escalabilidad.",
+    detailedDescription: "", // Puedes añadir una descripción detallada si la tienes
+    url: "https://formix.bo/",
+    code: "",
+    slug: "agetic",
+    images: [
+      {
+        src: "/experience/agetic/uno-desktop.png",
+        alt: "uno-desktop",
+        device: "desktop",
+        height: 638,
+        width: 1254,
+      },
+      {
+        src: "/experience/agetic/uno-mobile.png",
+        alt: "uno-mobile",
+        device: "mobile",
+        width: 507,
+        height: 894,
+      },
+      {
+        src: "/experience/agetic/dos-desktop.png",
+        alt: "dos-desktop",
+        device: "desktop",
+        height: 638,
+        width: 1254,
+      },
+      {
+        src: "/experience/agetic/dos-mobile.png",
+        alt: "dos-mobile",
+        device: "mobile",
+        width: 507,
+        height: 894,
+      },
+      {
+        src: "/experience/agetic/tres-desktop.png",
+        alt: "tres-desktop",
+        device: "desktop",
+        height: 638,
+        width: 1254,
+      },
+      {
+        src: "/experience/agetic/tres-mobile.png",
+        alt: "tres-mobile",
+        device: "mobile",
+        width: 507,
+        height: 894,
+      },
+      {
+        src: "/experience/agetic/cuatro-desktop.png",
+        alt: "cuatro-desktop",
+        device: "desktop",
+        height: 638,
+        width: 1254,
+      },
+      {
+        src: "/experience/agetic/cuatro-mobile.png",
+        alt: "cuatro-mobile",
+        device: "mobile",
+        width: 507,
+        height: 894,
+      },
+      {
+        src: "/experience/agetic/cinco-desktop.png",
+        alt: "cinco-desktop",
+        device: "desktop",
+        height: 638,
+        width: 1254,
+      },
+      {
+        src: "/experience/agetic/cinco-mobile.png",
+        alt: "cinco-mobile",
+        device: "mobile",
+        width: 507,
+        height: 894,
+      },
+      {
+        src: "/experience/agetic/seis-desktop.png",
+        alt: "seis-desktop",
+        device: "desktop",
+        height: 638,
+        width: 1254,
+      },
+      {
+        src: "/experience/agetic/siete-desktop.png",
+        alt: "siete-desktop",
+        device: "desktop",
+        height: 638,
+        width: 1254,
+      },
+      {
+        src: "/experience/agetic/ocho-desktop.png",
+        alt: "ocho-desktop",
+        device: "desktop",
+        height: 638,
+        width: 1254,
+      },
+    ],
+  },
 ];
 
 export const getStaticPaths = () => {
-  const experience = [{ params: { slug: "egovf" } }];
+  const experience = [{ params: { slug: "egovf" } }, { params: { slug: "agetic" } }];
 
   return experience;
 };
