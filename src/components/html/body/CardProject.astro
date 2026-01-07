@@ -10,13 +10,22 @@ interface Props {
   url: string;
   code: string;
   image: string;
+  dev?: boolean;
 }
 
-const { className = "", title, description, url, code, image } = Astro.props;
+const {
+  className = "",
+  title,
+  description,
+  url,
+  code,
+  image,
+  dev = false,
+} = Astro.props;
 ---
 
 <article
-  class={`cardProject grid grid-cols-1 gap-4 p-4 border border-[var(--color-gray)] ${className}`}
+  class={`cardProject relative grid grid-cols-1 gap-4 p-4 border border-[var(--color-gray)] ${className}`}
 >
   <header
     class="flex flex-row gap-1 items-center text-step-_1 leading-none text-[var(--color-html)] font-bold"
@@ -49,6 +58,13 @@ const { className = "", title, description, url, code, image } = Astro.props;
       )
     }
   </footer>
+  {
+    dev && (
+      <div class="tag absolute right-0 bottom-0 bg-red-600 font-semibold w-20 text-center text-_step2 transform -rotate-45 translate-x-6 -translate-y-2">
+        DEV
+      </div>
+    )
+  }
 </article>
 
 <style>
