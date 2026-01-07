@@ -39,52 +39,53 @@ const experience: Experience[] = [
         src: "/experience/egovf/home-desktop.png",
         alt: "home-desktop",
         device: "desktop",
-        height:638 ,
-        width: 1254 ,
+        height: 638,
+        width: 1254,
       },
       {
         src: "/experience/egovf/login-desktop.png",
         alt: "home-desktop",
         device: "desktop",
-        height:830 ,
-        width: 1254 ,
+        height: 830,
+        width: 1254,
       },
       {
         src: "/experience/egovf/login-mobile.png",
         alt: "home-desktop",
         device: "mobile",
         width: 507,
-        height:  894 ,
+        height: 894,
       },
       {
         src: "/experience/egovf/register-desktop.png",
         alt: "home-desktop",
         device: "desktop",
-        height:638 ,
-        width: 1254 ,
+        height: 638,
+        width: 1254,
       },
       {
         src: "/experience/egovf/register-mobile.png",
         alt: "home-desktop",
         device: "mobile",
         width: 507,
-        height:  894 ,
+        height: 894,
       },
       {
         src: "/experience/egovf/slider-desktop.png",
         alt: "home-desktop",
         device: "desktop",
-        height:700 ,
-        width: 1254 ,
+        height: 700,
+        width: 1254,
       },
     ],
   },
-   {
+  {
     initialDate: "2025-02-01",
     endDate: "2025-08-31",
     company: "AGETIC",
     position: "Asistente de DevOps y Automatización de Software",
-    description: "Implementé pruebas de seguridad en sistemas institucionales con Caido y BurpSuite, alineando con estándares OWASP. Desarrollé la plataforma Formix para gestión de formularios con landings informativas y módulos de solicitudes. Integré dashboards estadísticos con Chart.js para visualizar métricas clave. Extendí funcionalidades en APIs NestJS, automatizando actualizaciones con Pulumi. Diseñé nuevos comandos en CLI Go para gestión de volúmenes NFS con Nomad. Implementé pruebas unitarias y refactoricé componentes para mejorar mantenibilidad y escalabilidad.",
+    description:
+      "Implementé pruebas de seguridad en sistemas institucionales con Caido y BurpSuite, alineando con estándares OWASP. Desarrollé la plataforma Formix para gestión de formularios con landings informativas y módulos de solicitudes. Integré dashboards estadísticos con Chart.js para visualizar métricas clave. Extendí funcionalidades en APIs NestJS, automatizando actualizaciones con Pulumi. Diseñé nuevos comandos en CLI Go para gestión de volúmenes NFS con Nomad. Implementé pruebas unitarias y refactoricé componentes para mejorar mantenibilidad y escalabilidad.",
     detailedDescription: "", // Puedes añadir una descripción detallada si la tienes
     url: "https://formix.bo/",
     code: "",
@@ -186,7 +187,10 @@ const experience: Experience[] = [
 ];
 
 export const getStaticPaths = () => {
-  const experience = [{ params: { slug: "egovf" } }, { params: { slug: "agetic" } }];
+  const experience = [
+    { params: { slug: "egovf" } },
+    { params: { slug: "agetic" } },
+  ];
 
   return experience;
 };
@@ -203,7 +207,7 @@ const project = experience.find((exp) => {
   <Header />
   <article class="flex flex-col gap-2">
     <h2
-      transition:name="title-experience"
+      transition:name={`title-experience-${project?.initialDate}`}
       class="font-semibold text-2xl text-yellowColor"
     >
       {project?.company}
@@ -213,7 +217,7 @@ const project = experience.find((exp) => {
       >
     </h2>
     <p
-      transition:name="description-experience"
+      transition:name={`description-experience-${project?.initialDate}`}
       class="text-pretty text-_step1 font-normal text-gray-400"
     >
       {project?.description}
@@ -230,8 +234,6 @@ const project = experience.find((exp) => {
     >
       {
         project?.images.map((image) => {
-          // console.log("image");
-          // console.log(image);
           return (
              <a
                 href={image.src},
@@ -252,11 +254,11 @@ const project = experience.find((exp) => {
     <!-- </div> -->
   </article>
 
-  <dialog>
+  <!-- <dialog>
     <div class="image">
-      <img src="" alt="Imagen" class="w-full h-auto" />
+      <img src="#" alt="Imagen" class="w-full h-auto" />
     </div>
-  </dialog>
+  </dialog> -->
 </Layout>
 
 <script>
@@ -274,7 +276,9 @@ const project = experience.find((exp) => {
     document?.querySelector("masonry-layout")?.layout();
   }
 
-  document.addEventListener('astro:page-load', initializeSwipeGallery);
+  initializeSwipeGallery();
+
+  document.addEventListener("astro:page-load", initializeSwipeGallery);
 </script>
 
 <style>

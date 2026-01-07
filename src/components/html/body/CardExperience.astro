@@ -1,73 +1,97 @@
 ---
-import IconArrowRight from '../../../Icons/IconArrowRight.astro'
-import IconGoToPage from '../../../Icons/IconGoToPage.astro'
-import Link from '../../ui/Link.astro'
-
+import IconArrowRight from "../../../Icons/IconArrowRight.astro";
+import IconGoToPage from "../../../Icons/IconGoToPage.astro";
+import Link from "../../ui/Link.astro";
 
 interface Props {
-  className?: string
-  initialDate: string
-  endDate: string
-  company: string
-  position: string
-  description: string
-  url: string
-  slug: string
+  className?: string;
+  initialDate: string;
+  endDate: string;
+  company: string;
+  position: string;
+  description: string;
+  url: string;
+  slug: string;
 }
 
-const { className = "", initialDate, endDate, company, position, description, url, slug } = Astro.props;
+const {
+  className = "",
+  initialDate,
+  endDate,
+  company,
+  position,
+  description,
+  url,
+  slug,
+} = Astro.props;
 
-function formatDate(date: string){
-  const fecha = new Date(`${date}T00:00:00`)
+function formatDate(date: string) {
+  const fecha = new Date(`${date}T00:00:00`);
   const options: Intl.DateTimeFormatOptions = {
-    day: '2-digit', // '2-digit' o 'numeric'
-    month: 'short', // 'long', 'short', 'narrow', 'numeric' o '2-digit'
-    year: 'numeric'  // 'numeric' o '2-digit'
-};  
-  const formatedDate = fecha.toLocaleDateString('es-BO', options).toLocaleUpperCase().replaceAll(' ', '-')
-  return formatedDate
+    day: "2-digit", // '2-digit' o 'numeric'
+    month: "short", // 'long', 'short', 'narrow', 'numeric' o '2-digit'
+    year: "numeric", // 'numeric' o '2-digit'
+  };
+  const formatedDate = fecha
+    .toLocaleDateString("es-BO", options)
+    .toLocaleUpperCase()
+    .replaceAll(" ", "-");
+  return formatedDate;
 }
-
-
 ---
 
 <article class="cardExperience flex flex-col gap-2 pb-4">
   <header class="text-step0">
-    <time class="text-[var(--color-section)] text-_step2" datetime={initialDate}>{ formatDate(initialDate) }</time>
+    <time class="text-[var(--color-section)] text-_step2" datetime={initialDate}
+      >{formatDate(initialDate)}</time
+    >
     <span class="text-_step2">al</span>
-    <time class="text-[var(--color-section)] text-_step2" datetime={endDate}>{ formatDate(endDate) }</time>
-    <h2 
-      transition:name="title-experience"
-      class="font-semibold">
-      { company } -
-      <span class="font-normal text-[var(--color-section)]">{ position }</span>
+    <time class="text-[var(--color-section)] text-_step2" datetime={endDate}
+      >{formatDate(endDate)}</time
+    >
+    <h2
+      transition:name={`title-experience-${initialDate}`}
+      class="font-semibold"
+    >
+      {company} -
+      <span class="font-normal text-[var(--color-section)]">{position}</span>
     </h2>
   </header>
-  <p 
-    transition:name="description-experience"
+  <p
+    transition:name={`description-experience-${initialDate}`}
     class="text-pretty text-_step1 line-clamp-[7] sm:line-clamp-4"
   >
-    { description }
+    {description}
   </p>
   <footer class="flex flex-row gap-2 flex-wrap">
     {
-      url && (<Link href={url} className='hover:text-[var(--color-section)] text-_step1'>
-      Sitio <IconGoToPage size='24' />
-    </Link>)
+      url && (
+        <Link
+          href={url}
+          className="hover:text-[var(--color-section)] text-_step1"
+        >
+          Sitio <IconGoToPage size="24" />
+        </Link>
+      )
     }
     {
-      slug && (<Link href={`/${slug}`} target='_self' className='hover:text-[var(--color-html)] text-_step1'>
-      Ver detalles <IconArrowRight />
-    </Link>)
+      slug && (
+        <Link
+          href={`/${slug}`}
+          target="_self"
+          className="hover:text-[var(--color-html)] text-_step1"
+        >
+          Ver detalles <IconArrowRight />
+        </Link>
+      )
     }
   </footer>
 </article>
 
 <style>
-
   @keyframes entry {
     from {
-      opacity: 0;      
+      opacity: 0;
     }
     to {
       opacity: 1;
@@ -79,6 +103,4 @@ function formatDate(date: string){
     animation-timeline: view();
     animation-range: entry 10% cover 20%;
   }
-
-
 </style>

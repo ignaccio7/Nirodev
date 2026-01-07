@@ -5,114 +5,114 @@ import Toast from "../components/ui/Toast.astro";
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Niduga - Portfolio</title>
-		<link rel="canonical" href="https://nirodev.vercel.app/" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="favicon" href="/favicon.svg" />
-		<meta name="twitter:card" content="summary" />
-		<meta property="og:type" content="website" />
-		<meta
-			property="og:title"
-			name="twitter:title"
-			content="Portafolio-NIRODEV"
-		/>
-		<meta
-			property="og:description"
-			name="twitter:description"
-			content="Hola bienvenid@ a mi Portafolio Profesional, soy Nestor Rojas, Desarrollador Web"
-		/>
-		<meta
-			property="og:image"
-			name="twitter:image"
-			content="https://unavatar.io/github/ignaccio7"
-		/>
-		<meta
-			property="og:url"
-			name="twitter:url"
-			content="https://unavatar.io/github/ignaccio7"
-		/>
-		<ClientRouter />
-	</head>
-	<body class="container">
-		<div
-			class="fixed inset-0 z-[-2] h-screen w-screen bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"
-		>
-		</div>
-		<Toast content="Mensaje enviado correctamente" />
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Niduga - Portfolio</title>
+    <link rel="canonical" href="https://nirodev.vercel.app/" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="favicon" href="/favicon.svg" />
+    <meta name="twitter:card" content="summary" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      name="twitter:title"
+      content="Portafolio-NIRODEV"
+    />
+    <meta
+      property="og:description"
+      name="twitter:description"
+      content="Hola bienvenid@ a mi Portafolio Profesional, soy Nestor Rojas, Desarrollador Web"
+    />
+    <meta
+      property="og:image"
+      name="twitter:image"
+      content="https://unavatar.io/github/ignaccio7"
+    />
+    <meta
+      property="og:url"
+      name="twitter:url"
+      content="https://unavatar.io/github/ignaccio7"
+    />
+  </head>
+  <body class="container">
+    <ClientRouter />
+    <div
+      class="fixed inset-0 z-[-2] h-screen w-screen bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"
+    >
+    </div>
+    <Toast content="Mensaje enviado correctamente" />
+    <slot />
+  </body>
 </html>
 
 <style is:global>
-	@font-face {
-		font-family: "Aldrich";
-		src:
-			url("/fonts/Aldrich-Regular.woff2") format("woff2"),
-			url("/fonts/Aldrich-Regular.ttf") format("truetype");
-		font-weight: 400;
-		font-style: normal;
-	}
+  @font-face {
+    font-family: "Aldrich";
+    src:
+      url("/fonts/Aldrich-Regular.woff2") format("woff2"),
+      url("/fonts/Aldrich-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+  }
 
-	/***************** Custom Proerties *****************/
-	:root {
-		--font-primary: "Aldrich", sans-serif;
+  /***************** Custom Proerties *****************/
+  :root {
+    --font-primary: "Aldrich", sans-serif;
 
-		--color-white: #f3f3f3;
-		--color-black: #000000;
-		--color-gray: #4e4e4e;
+    --color-white: #f3f3f3;
+    --color-black: #000000;
+    --color-gray: #4e4e4e;
 
-		--color-doctype: rgb(223, 92, 92);
-		--color-html: rgb(61, 170, 85);
-		--color-head: rgb(62, 135, 230);
-		--color-body: rgb(212, 209, 3);
-		--color-footer: rgb(231, 124, 25);
+    --color-doctype: rgb(223, 92, 92);
+    --color-html: rgb(61, 170, 85);
+    --color-head: rgb(62, 135, 230);
+    --color-body: rgb(212, 209, 3);
+    --color-footer: rgb(231, 124, 25);
 
-		--step--2: clamp(0.78rem, calc(0.77rem + 0.03vw), 0.8rem);
-		--step--1: clamp(0.94rem, calc(0.92rem + 0.11vw), 1rem);
-		--step-0: clamp(1.13rem, calc(1.08rem + 0.22vw), 1.25rem);
-		--step-1: clamp(1.35rem, calc(1.28rem + 0.37vw), 1.56rem);
-		--step-2: clamp(1.62rem, calc(1.5rem + 0.58vw), 1.95rem);
-		--step-3: clamp(1.94rem, calc(1.77rem + 0.87vw), 2.44rem);
-		--step-4: clamp(2.33rem, calc(2.08rem + 1.25vw), 3.05rem);
-		--step-5: clamp(2.8rem, calc(2.45rem + 1.77vw), 3.82rem);
-	}
+    --step--2: clamp(0.78rem, calc(0.77rem + 0.03vw), 0.8rem);
+    --step--1: clamp(0.94rem, calc(0.92rem + 0.11vw), 1rem);
+    --step-0: clamp(1.13rem, calc(1.08rem + 0.22vw), 1.25rem);
+    --step-1: clamp(1.35rem, calc(1.28rem + 0.37vw), 1.56rem);
+    --step-2: clamp(1.62rem, calc(1.5rem + 0.58vw), 1.95rem);
+    --step-3: clamp(1.94rem, calc(1.77rem + 0.87vw), 2.44rem);
+    --step-4: clamp(2.33rem, calc(2.08rem + 1.25vw), 3.05rem);
+    --step-5: clamp(2.8rem, calc(2.45rem + 1.77vw), 3.82rem);
+  }
 
-	*,
-	*::before,
-	*::after {
-		box-sizing: border-box;
-	}
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
 
-	html {
-		font-family: var(--font-primary);
-		font-size: var(--step-0);
-		scroll-behavior: smooth;
-		box-sizing: inherit;
-		color: var(--color-white);
-	}
-	body {
-		margin: 0;
-		padding: 0;
-		overflow-x: hidden;
-		display: flex;
-		flex-direction: column;
-		gap: 2rem;
-	}
+  html {
+    font-family: var(--font-primary);
+    font-size: var(--step-0);
+    scroll-behavior: smooth;
+    box-sizing: inherit;
+    color: var(--color-white);
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
 
-	@tailwind components;
-	@layer components {
-		.container {
-			max-width: 1280px;
-			margin: 0 auto;
-			padding: 2rem 1rem;
-		}
+  @tailwind components;
+  @layer components {
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
 
-		.background-color {
-			@apply bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))];
-		}
-	}
+    .background-color {
+      @apply bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))];
+    }
+  }
 </style>
