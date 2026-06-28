@@ -1,10 +1,11 @@
 ---
 import Section from "../components/Section.astro";
 import Social from "../components/Social.astro";
+import SwitchDarkMode from "../components/SwitchDarkMode.astro";
 import Button from "../components/ui/Button.astro";
 ---
 
-<Section  
+<Section
   section="doctype"
   tag="DOCTYPE"
   className={`w-full h-[calc(100dvh-4rem)] place-content-center text-center 
@@ -20,9 +21,12 @@ import Button from "../components/ui/Button.astro";
     </div>
   </h1>
   <Social className="justify-center my-1 mb-2 sm:hidden" />
-  <Button color="white" className="text-_step2 block sm:hidden mx-auto px-0 py-0">
-    <a 
-      href="https://drive.google.com/file/d/19pFRDgq0KcfbPk2wL-u6IZxVrGV0rVaF/view?usp=drive_link" 
+  <Button
+    color="white"
+    className="text-_step2 block sm:hidden mx-auto px-0 py-0"
+  >
+    <a
+      href="https://drive.google.com/file/d/19pFRDgq0KcfbPk2wL-u6IZxVrGV0rVaF/view?usp=drive_link"
       class="block w-full h-full !px-0 !py-0"
       target="_blank"
       rel="noopener noreferrer"
@@ -30,9 +34,12 @@ import Button from "../components/ui/Button.astro";
       Descarga mi curriculum
     </a>
   </Button>
-  <span class="hidden sm:block text-right text-step1 font-bold">
-    MI PORTFOLIO
-  </span>
+  <div
+    class="hidden text-right text-step1 font-bold dark:text-red-400 sm:flex flex-row w-full justify-between items-center gap-4"
+  >
+    <SwitchDarkMode />
+    <h2>BIENVENIDO A MI PORTAFOLIO</h2>
+  </div>
 </Section>
 
 <style></style>

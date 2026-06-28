@@ -35,11 +35,44 @@ import Toast from "../components/ui/Toast.astro";
       name="twitter:url"
       content="https://unavatar.io/github/ignaccio7"
     />
+
+    <script is:inline>
+      function setTheme(theme) {
+        const html = document.documentElement;
+        if (theme === "dark") {
+          html.classList.add("dark");
+          localStorage.setItem("theme", "dark");
+        } else {
+          html.classList.remove("dark");
+          localStorage.setItem("theme", "light");
+        }
+      }
+
+      const storedTheme = localStorage.getItem("theme");
+      if (storedTheme) {
+        setTheme(storedTheme);
+      } else {
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches;
+        setTheme(prefersDark ? "dark" : "light");
+      }
+
+      document.addEventListener("astro:after-swap", () => {
+        const storedTheme = localStorage.getItem("theme");
+        setTheme(storedTheme ?? "dark");
+      });
+    </script>
   </head>
   <body class="container">
     <ClientRouter />
+    <!-- <div
+      class="fixed inset-0 z-[-2] h-screen w-screen bg-color bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"
+    >
+    </div> -->
     <div
-      class="fixed inset-0 z-[-2] h-screen w-screen bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"
+      class="fixed inset-0 z-[-2] h-screen w-screen"
+      style="background-color: var(--bg-color); background-image: var(--bg-gradient);"
     >
     </div>
     <Toast content="Mensaje enviado correctamente" />
@@ -59,6 +92,17 @@ import Toast from "../components/ui/Toast.astro";
 
   /***************** Custom Proerties *****************/
   :root {
+    --bg-color: #0a0a0a;
+    --bg-gradient: radial-gradient(
+      ellipse 80% 80% at 50% -20%,
+      rgba(120, 119, 198, 0.3),
+      transparent
+    );
+
+    --text-color: #f3f3f3;
+    --switch-bg: rgba(255, 255, 255, 0.15);
+    --switch-active-bg: rgba(0, 0, 0, 0.25);
+
     --font-primary: "Aldrich", sans-serif;
 
     --color-white: #f3f3f3;
@@ -87,13 +131,31 @@ import Toast from "../components/ui/Toast.astro";
     box-sizing: border-box;
   }
 
+  .dark {
+    --bg-color: #f9fcfe;
+    --bg-gradient: radial-gradient(
+      ellipse 80% 80% at 50% -20%,
+      rgba(120, 119, 198, 0.08),
+      transparent
+    );
+    --text-color: #000000;
+    --switch-bg: rgba(0, 0, 0, 0.15);
+    --switch-active-bg: rgba(255, 255, 255, 0.25);
+  }
+
   html {
     font-family: var(--font-primary);
     font-size: var(--step-0);
     scroll-behavior: smooth;
     box-sizing: inherit;
-    color: var(--color-white);
+
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition:
+      background-color 0.5s,
+      color 0.5s;
   }
+
   body {
     margin: 0;
     padding: 0;
@@ -101,12 +163,24 @@ import Toast from "../components/ui/Toast.astro";
     display: flex;
     flex-direction: column;
     gap: 2rem;
+
+    /* background-color: var(--bg-color); */
+    color: var(--text-color);
+  }
+
+  html,
+  body,
+  .fixed.inset-0 {
+    transition:
+      background-color 0.5s ease,
+      background-image 0.5s ease,
+      color 0.5s ease;
   }
 
   @tailwind components;
   @layer components {
     .container {
-      max-width: 1280px;
+      max-width: 1536px;
       margin: 0 auto;
       padding: 2rem 1rem;
     }
