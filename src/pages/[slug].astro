@@ -212,13 +212,13 @@ const project = experience.find((exp) => {
     >
       {project?.company}
       <br />
-      <span class="font-normal text-whiteColor text-step0"
+      <span class="font-normal text-whiteColor text-step0 dark:text-gray-700"
         >{project?.position}</span
       >
     </h2>
     <p
       transition:name={`description-experience-${project?.initialDate}`}
-      class="text-pretty text-_step1 font-normal text-gray-400"
+      class="text-pretty text-_step1 font-normal text-gray-400 dark:text-gray-600"
     >
       {project?.description}
     </p>

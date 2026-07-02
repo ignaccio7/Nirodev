@@ -100,6 +100,13 @@ import Button from "../components/ui/Button.astro";
     }
   }
 
+  html.dark form label {
+    & input,
+    textarea {
+      border: 1px solid rgb(193, 193, 193);
+    }
+  }
+
   form .group {
     display: flex;
     gap: 1rem;
@@ -116,7 +123,7 @@ import Button from "../components/ui/Button.astro";
 
 <script type="module">
   //function initContactForm() {
-  console.log("Inicio formulario")
+  console.log("Inicio formulario");
   const $form = document.querySelector("form");
 
   async function sendEmail(content) {
@@ -130,7 +137,7 @@ import Button from "../components/ui/Button.astro";
             Accept: "application/json",
           },
           body: JSON.stringify(content),
-        }
+        },
       );
 
       if (!response.ok) throw new Error("Ocurrio un error al enviar el correo");
@@ -143,7 +150,6 @@ import Button from "../components/ui/Button.astro";
       //   },1000)
       // })
       // console.log(response);
-      
 
       const data = await response.json();
       return {
@@ -162,8 +168,8 @@ import Button from "../components/ui/Button.astro";
     const customEvent = new CustomEvent("show-toast", {
       detail: { content },
     });
-    console.log('llamando al toast');
-    
+    console.log("llamando al toast");
+
     window.dispatchEvent(customEvent);
   };
 

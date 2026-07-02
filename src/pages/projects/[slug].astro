@@ -1,0 +1,65 @@
+---
+import type { GetStaticPaths } from "astro";
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import Header from "../../components/experience/Header.astro";
+import Link from "../../components/ui/Link.astro";
+import IconGoToPage from "../../Icons/IconGoToPage.astro";
+import IconGithub from "../../Icons/IconGithub.astro";
+
+export const getStaticPaths = (async () => {
+  const projects = await getCollection("projects");
+  console.log(projects);
+
+  return projects.map((project: any) => {
+    return {
+      params: {
+        slug: project.data.slug,
+      },
+      props: { ...project.data },
+    };
+  });
+}) satisfies GetStaticPaths;
+
+const { title, description, image, url, code } = Astro.props;
+---
+
+<Layout>
+  <Header />
+  <article class="flex flex-row gap-4 flex-wrap">
+    <div class="basis-96 grow flex flex-col gap-4">
+      <h1
+        transition:name={`title-project-${title}`}
+        class="font-semibold text-2xl text-yellowColor"
+      >
+        {title}
+      </h1>
+      <p
+        transition:name={`description-project-${title}`}
+        class="text-pretty text-_step1 font-normal text-gray-400 dark:text-gray-600"
+      >
+        {description}
+      </p>
+
+      <footer class="flex flex-row flex-wrap gap-2">
+        {
+          url && (
+            <Link href={url} className="hover:text-yellowColor text-_step1">
+              Sitio <IconGoToPage size="24" />
+            </Link>
+          )
+        }
+        {
+          code && (
+            <Link href={code} className="hover:text-yellowColor text-_step1">
+              Código <IconGithub size="24" />
+            </Link>
+          )
+        }
+      </footer>
+    </div>
+    <div class="cover w-full max-w-lg bg-red-200">
+      <img src={image} alt={title} />
+    </div>
+  </article>
+</Layout>

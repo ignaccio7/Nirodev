@@ -42,12 +42,14 @@ function formatDate(date: string) {
 
 <article class="cardExperience flex flex-col gap-2 pb-4">
   <header class="text-step0">
-    <time class="text-[var(--color-section)] text-_step2" datetime={initialDate}
-      >{formatDate(initialDate)}</time
+    <time
+      class="text-[var(--color-section)] dark:text-black text-_step2"
+      datetime={initialDate}>{formatDate(initialDate)}</time
     >
     <span class="text-_step2">al</span>
-    <time class="text-[var(--color-section)] text-_step2" datetime={endDate}
-      >{formatDate(endDate)}</time
+    <time
+      class="text-[var(--color-section)] dark:text-black text-_step2"
+      datetime={endDate}>{formatDate(endDate)}</time
     >
     <h2
       transition:name={`title-experience-${initialDate}`}

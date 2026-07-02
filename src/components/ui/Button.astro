@@ -5,18 +5,23 @@ interface Props {
   type?: "button" | "submit" | "reset";
 }
 
-const { color = "head", className = "", type = 'button' } = Astro.props;
+const { color = "head", className = "", type = "button" } = Astro.props;
 ---
 
 <button
   type={type}
   class={`    
-  w-fit text-black font-semibold rounded-md px-4 py-2 border-2 
+  w-fit text-black dark:text-white font-semibold rounded-md px-4 py-2 border-2 
   hover:bg-black hover:border-white hover:text-white 
+  dark:hover:border-black dark:hover:bg-white dark:hover:text-black
   transition-all duration-500
   ${className}
   `}
-  class:list={[{ "bg-white border-white": color === "white" }, { "bg-blueColor border-blueColor" : color === "head" }, { "bg-greenColor border-greenColor" : color === "html" }]}
+  class:list={[
+    { "bg-white border-white": color === "white" },
+    { "bg-blueColor border-blueColor": color === "head" },
+    { "bg-greenColor border-greenColor": color === "html" },
+  ]}
 >
   <slot />
 </button>
