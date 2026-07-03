@@ -55,7 +55,11 @@ import Toast from "../components/ui/Toast.astro";
         const prefersDark = window.matchMedia(
           "(prefers-color-scheme: dark)",
         ).matches;
-        setTheme(prefersDark ? "dark" : "light");
+
+        console.log(prefersDark);
+        
+
+        setTheme(prefersDark ? "light" : "dark");
       }
 
       document.addEventListener("astro:after-swap", () => {

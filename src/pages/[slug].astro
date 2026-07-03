@@ -1,5 +1,6 @@
 ---
 import Header from "../components/experience/Header.astro";
+import GalleryMasonry from "../components/ui/GalleryMasonry.astro";
 import Layout from "../layouts/Layout.astro";
 
 interface Experience {
@@ -218,16 +219,16 @@ const project = experience.find((exp) => {
     </h2>
     <p
       transition:name={`description-experience-${project?.initialDate}`}
-      class="text-pretty text-_step1 font-normal text-gray-400 dark:text-gray-600"
+      class="text-pretty text-_step1 font-normal text-gray-400 dark:text-gray-700"
     >
       {project?.description}
     </p>
-    <p class="text-pretty text-_step1 font-normal text-gray-400">
+    <p class="text-pretty text-_step1 font-normal text-gray-600 mb-4">
       {project?.detailedDescription}
     </p>
 
     <!-- <div class="cardImages"> -->
-    <masonry-layout
+    <!-- <masonry-layout
       gap="16"
       class="gallery pswp-gallery pswp-gallery--single-column"
       id="gallery"
@@ -250,8 +251,9 @@ const project = experience.find((exp) => {
           );
         })
       }
-    </masonry-layout>
+    </masonry-layout> -->
     <!-- </div> -->
+     <GalleryMasonry images={project?.images} />
   </article>
 
   <!-- <dialog>
@@ -260,7 +262,7 @@ const project = experience.find((exp) => {
     </div>
   </dialog> -->
 </Layout>
-
+<!-- 
 <script>
   import PhotoSwipeLightbox from "photoswipe/lightbox";
   import "photoswipe/style.css";
@@ -402,4 +404,4 @@ const project = experience.find((exp) => {
       transform: scale(0.5);
     }
   }
-</style>
+</style> -->

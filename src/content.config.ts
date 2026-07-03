@@ -12,6 +12,15 @@ const projectsCollection = defineCollection({
     code: z.string(),
     image: z.string(),
     dev: z.boolean(),
+    images: z.array(
+      z.object({
+        src: z.string(),
+        alt: z.string(),
+        device: z.enum(["mobile", "desktop"]),
+        width: z.number(),
+        height: z.number(),
+      })
+    ).optional(),
     // tag: z.string()
   }),
 });

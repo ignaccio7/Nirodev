@@ -6,6 +6,7 @@ import Header from "../../components/experience/Header.astro";
 import Link from "../../components/ui/Link.astro";
 import IconGoToPage from "../../Icons/IconGoToPage.astro";
 import IconGithub from "../../Icons/IconGithub.astro";
+import GalleryMasonry from "../../components/ui/GalleryMasonry.astro";
 
 export const getStaticPaths = (async () => {
   const projects = await getCollection("projects");
@@ -21,7 +22,11 @@ export const getStaticPaths = (async () => {
   });
 }) satisfies GetStaticPaths;
 
-const { title, description, image, url, code } = Astro.props;
+const { title, description, image, url, code, images } = Astro.props;
+
+console.log(title);
+console.log(images);
+
 ---
 
 <Layout>
@@ -59,7 +64,8 @@ const { title, description, image, url, code } = Astro.props;
       </footer>
     </div>
     <div class="cover w-full max-w-lg bg-red-200">
-      <img src={image} alt={title} />
+      <img src={image} alt={title} transition:name={`image-project-${title}`} />
     </div>
   </article>
+  <GalleryMasonry images={images} />
 </Layout>

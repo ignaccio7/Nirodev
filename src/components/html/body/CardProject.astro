@@ -27,7 +27,7 @@ const {
 ---
 
 <article
-  class={`cardProject relative grid grid-cols-1 gap-4 p-4 border border-[var(--color-gray)] dark:border-gray-300 ${className}`}
+  class={`cardProject relative grid grid-cols-1 gap-4 p-4 border border-[var(--color-gray)] dark:border-gray-400 ${className}`}
 >
   <header
     class="flex flex-row gap-1 items-center text-step-_1 leading-none text-[var(--color-html)] font-bold"
@@ -49,6 +49,7 @@ const {
     </p>
     <picture>
       <img
+        transition:name={`image-project-${title}`}
         class="w-full h-auto aspect-video"
         src={image}
         alt={`Image of ${title}`}
