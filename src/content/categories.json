@@ -3,12 +3,12 @@
     "id": "proyectosjs",
     "title": "Proyectos JS",
     "description": "Proyectos realizados con JavaScript para practicar funcionalidades nuevas e interesantes acerca de las nuevas especificaciones de este maravilloso lenguaje.",
-    "image": "/src/assets/images/proyectosjs/proyectosjs.jpeg"
+    "image": "/src/assets/images/proyectosjs/proyectosjs.png"
   },
   {
     "id": "maquetacion",
     "title": "Maquetación",
     "description": "Prácticas de maquetación, layouts y responsive design.",
-    "image": "/src/assets/images/maquetacion/maquetacion.jpeg"
+    "image": "/src/assets/images/maquetacion/maquetacion.png"
   }
 ]

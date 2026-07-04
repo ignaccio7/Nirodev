@@ -4,6 +4,9 @@ import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import Layout from "../../../layouts/Layout.astro";
 import Header from "../../../components/experience/Header.astro";
+import Link from "../../../components/ui/Link.astro";
+import IconGoToPage from "../../../Icons/IconGoToPage.astro";
+import IconGithub from "../../../Icons/IconGithub.astro";
 
 export async function getStaticPaths() {
   const allProjects = await getCollection("projects");
@@ -28,13 +31,21 @@ export async function getStaticPaths() {
 
 const images = import.meta.glob<{ default: ImageMetadata }>(
   "/src/assets/images/**/*.{jpg,jpeg,png,webp,svg}",
-  // { eager: true },
+  { eager: true },
 );
 const { category, projects } = Astro.props;
 const { title, description, image } = category;
 
-if (!images[image])
+// if (!images[image])
+//   throw new Error(`Image ${image} not found in the assets folder.`);
+
+function isLocalAsset(url: string): boolean {
+  return url.startsWith("/") && url.startsWith("/src/assets/images/");
+}
+
+if (isLocalAsset(image) && !images[image]) {
   throw new Error(`Image ${image} not found in the assets folder.`);
+}
 ---
 
 <Layout>
@@ -42,13 +53,13 @@ if (!images[image])
   <article class="flex flex-row gap-4 flex-wrap">
     <div class="basis-96 grow flex flex-col gap-4">
       <h1
-        transition:name={`title-category-${title}`}
+        transition:name={`title-project-${title}`}
         class="font-semibold text-2xl md:text-4xl text-yellowColor"
       >
         {title}
       </h1>
       <p
-        transition:name={`description-category-${title}`}
+        transition:name={`description-project-${title}`}
         class="text-pretty text-_step1 font-normal text-gray-400 dark:text-gray-600"
       >
         {description}
@@ -58,46 +69,73 @@ if (!images[image])
       <!-- <img
         src={image}
         alt={title}
-        transition:name={`image-category-${title}`}
+        transition:name={`image-project-${title}`}
       /> -->
       <!-- <Image
         src={images[image]()}
         alt={title}
-        transition:name={`image-category-${title}`}
+        transition:name={`image-project-${title}`}
         class="w-full h-full object-cover object-center"
       /> -->
     </div>
   </article>
   <section class="projects grid grid-cols-1 gap-4">
-    <article class="flex flex-row gap-4 flex-wrap">
-      <div class="content flex flex-col gap-4 bg-red-300 grow basis-96">
-        <h2>Proyecto X</h2>
-        <p>Lorem ipsum dolor</p>
-      </div>
-      <figure class="cover
-        w-full
-        max-w-md">
-        <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRST2yYNKLe60143E__1ErbJazMQTXphwOHp0FEp5lG0DpTnUMto5niHvxl&s=10"
-          alt="Project X"
-        />
-      </figure>
-    </article>
-    <article class="flex flex-row-reverse gap-4 flex-wrap">
-      <div class="content flex flex-col gap-4 bg-green-300 grow basis-96">
-        <h2>Proyecto X</h2>
-        <p>Lorem ipsum dolor</p>
-      </div>
-      <figure class="cover
-        w-full
-        max-w-md">
-        <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRST2yYNKLe60143E__1ErbJazMQTXphwOHp0FEp5lG0DpTnUMto5niHvxl&s=10"
-          alt="Project X"
-        />
-      </figure>
-    </article>
+    {
+      projects.map((project, index) => {
+        const {
+          title,
+          description,
+          url,
+          code,
+          image: projectImage,
+        } = project.data;
+
+        return (
+          <article
+            class={`flex ${index % 2 === 0 ? "flex-row" : "flex-row-reverse"} gap-4 flex-wrap`}
+          >
+            <div class="content flex flex-col gap-4 grow basis-96">
+              <h2 class="text-3xl font-extrabold">{title}</h2>
+              <p>{description}</p>
+              <div class="actions flex flex-row gap-2">
+                {url && (
+                  <Link
+                    href={url}
+                    className="hover:text-[var(--color-section)] text-_step1"
+                  >
+                    Sitio <IconGoToPage size="24" />
+                  </Link>
+                )}
+                {code && (
+                  <Link
+                    href={code}
+                    className="hover:text-[var(--color-section)] text-_step1"
+                  >
+                    Código <IconGithub size="24" />
+                  </Link>
+                )}
+              </div>
+            </div>
+            <figure class="cover w-full max-w-md max-h-96">
+              {isLocalAsset(projectImage) && images[projectImage] ? (
+                <Image
+                  src={images[projectImage].default}
+                  alt={title}
+                  transition:name={`image-project-${title}`}
+                  class="w-full h-auto aspect-video"
+                />
+              ) : (
+                <img
+                  src={projectImage}
+                  alt={title}
+                  transition:name={`image-project-${title}`}
+                  class="w-full h-full object-cover object-center"
+                />
+              )}
+            </figure>
+          </article>
+        );
+      })
+    }
   </section>
-  {JSON.stringify(category, null, 2)}
-  {JSON.stringify(projects, null, 2)}
 </Layout>
