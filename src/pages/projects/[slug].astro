@@ -10,9 +10,9 @@ import GalleryMasonry from "../../components/ui/GalleryMasonry.astro";
 
 export const getStaticPaths = (async () => {
   const projects = await getCollection("projects");
-  console.log(projects);
+  const generalProjects = projects.filter((p) => p.data.category === "general");
 
-  return projects.map((project: any) => {
+  return generalProjects.map((project: any) => {
     return {
       params: {
         slug: project.data.slug,
@@ -26,7 +26,6 @@ const { title, description, image, url, code, images } = Astro.props;
 
 console.log(title);
 console.log(images);
-
 ---
 
 <Layout>

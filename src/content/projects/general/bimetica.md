@@ -1,5 +1,6 @@
 ---
 slug: "bimetica"
+category: "general"
 title: "Bimetica"
 description: "Esta es sitio web para una empresa comprometida en proporcionar servicios de diseño y construcción de alta calidad que estan orientados a satisfacer las necesidades de sus clientes y contribuir al desarrollo del país."
 url: "https://bimetica.com.bo/"

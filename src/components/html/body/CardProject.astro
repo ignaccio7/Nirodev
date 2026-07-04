@@ -8,6 +8,7 @@ interface Props {
   title: string;
   description: string;
   slug: string;
+  category: string;
   url?: string;
   code?: string;
   image?: string;
@@ -22,8 +23,16 @@ const {
   url,
   code,
   image,
+  category,
   dev = false,
 } = Astro.props;
+
+const goToProject = (s: string) => {
+  const projectSlug = s.toLowerCase().replace(/\s+/g, "-");
+  return category === "general"
+    ? `/projects/${projectSlug}`
+    : `/projects/${projectSlug}`;
+};
 ---
 
 <article
@@ -34,11 +43,7 @@ const {
   >
     <small><IconProject /></small>
     <h2 transition:name={`title-project-${title}`}>{title}</h2>
-    <a
-      href={`projects/${slug.toLowerCase().replace(/\s+/g, "-")}`}
-      class="absolute inset-0 z-10"
-    >
-    </a>
+    <a href={goToProject(slug)} class="absolute inset-0 z-10"> </a>
   </header>
   <div class="body">
     <p

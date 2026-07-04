@@ -29,7 +29,9 @@ const experience = [
 ---
 
 <Title title="Mi experiencia" className="mb-4" />
-<section class="flex flex-col gap-2 border-b border-[var(--color-gray)] pb-2">
+<section
+  class="flex flex-col gap-2 border-b border-[var(--color-gray)] dark:border-gray-400 pb-2"
+>
   {
     experience.map((exp) => {
       return <CardExperience {...exp} />;

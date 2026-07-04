@@ -16,7 +16,8 @@ const { images = [] } = Astro.props;
 <masonry-layout
   gap="16"
   class="gallery pswp-gallery pswp-gallery--single-column"
-  id="gallery"
+  id="gallery"  
+  maxcolwidth="400"
 >
   {
     images.map((image) => {
@@ -58,111 +59,3 @@ const { images = [] } = Astro.props;
 
   document.addEventListener("astro:page-load", initializeSwipeGallery);
 </script>
-<style>
-img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-.cardImages {
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  grid-template-rows: repeat(2, 150px);
-  grid-auto-rows: 150px;
-  gap: 10px;
-  /* grid-auto-flow: row dense; */
-}
-.item {
-  overflow: hidden;
-}
-.item img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
-  aspect-ratio: 16 / 9;
-}
-.item.mobile {
-  grid-row: span 4;
-  grid-column: span 2;
-}
-.item.desktop {
-  grid-row: span 3;
-  grid-column: span 4;
-}
-/* .item:nth-child(3n) {
-  grid-column: span 1;
-  grid-row: span 1;
-} */
-@media (max-width: 768px) {
-  .cardImages {
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, 150px);
-    grid-auto-rows: 150px;
-    grid-auto-flow: row dense;
-  }
-  .item.mobile {
-    grid-row: span 3;
-    grid-column: span 2;
-  }
-  .item.desktop {
-    grid-row: span 3;
-    grid-column: span 4;
-  }
-}
-@media (max-width: 480px) {
-  .cardImages {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 150px);
-    grid-auto-rows: 150px;
-    grid-auto-flow: row dense;
-  }
-  .item.mobile {
-    grid-row: span 3;
-    grid-column: span 2;
-  }
-  .item.desktop {
-    grid-row: span 2;
-    grid-column: span 2;
-  }
-}
-dialog::backdrop {
-  backdrop-filter: blur(10px);
-}
-dialog {
-  margin-inline: auto;
-  max-width: 1000px;
-  height: fit-content;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition:
-    display 0.5s allow-discrete,
-    overlay 0.5s allow-discrete;
-  animation: close 0.5s forwards;
-  &[open] {
-    animation: open 0.5s forwards;
-  }
-}
-@keyframes open {
-  from {
-    opacity: 0;
-    transform: scale(0.5);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-@keyframes close {
-  from {
-    opacity: 1;
-    transform: scale(1);
-  }
-  to {
-    opacity: 0;
-    transform: scale(0.5);
-  }
-}
-</style>

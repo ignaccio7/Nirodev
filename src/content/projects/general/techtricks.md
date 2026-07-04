@@ -1,5 +1,6 @@
 ---
 slug: "techtricks"
+category: "general"
 title: "Techtricks"
 description: "Este proyecto es un blog multipersonal que permitira publicar articulos a mas de una persona segun el superadministrador apruebe el articulo que publico antes"
 url: "https://techtricks.space/"
