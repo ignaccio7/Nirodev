@@ -11,14 +11,14 @@ const { color = "head", className = "", type = "button" } = Astro.props;
 <button
   type={type}
   class={`    
-  w-fit text-black dark:text-white font-semibold rounded-md px-4 py-2 border-2 
+  w-fit text-black dark:md:text-white font-semibold rounded-md px-4 py-2 border-2 
   hover:bg-black hover:border-white hover:text-white 
-  dark:hover:border-black dark:hover:bg-white dark:hover:text-black
+  dark:hover:border-white dark:hover:bg-black dark:hover:text-white
   transition-all duration-500
   ${className}
   `}
   class:list={[
-    { "bg-white border-white": color === "white" },
+    { "bg-white border-white dark:border-black": color === "white" },
     { "bg-blueColor border-blueColor": color === "head" },
     { "bg-greenColor border-greenColor": color === "html" },
   ]}
