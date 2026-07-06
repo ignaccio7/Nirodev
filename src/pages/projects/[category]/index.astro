@@ -101,7 +101,7 @@ if (isLocalAsset(image) && !images[image]) {
                 {url && (
                   <Link
                     href={url}
-                    className="hover:text-[var(--color-section)] text-_step1"
+                    className="hover:text-yellowColor text-_step1"
                   >
                     Sitio <IconGoToPage size="24" />
                   </Link>
@@ -109,14 +109,14 @@ if (isLocalAsset(image) && !images[image]) {
                 {code && (
                   <Link
                     href={code}
-                    className="hover:text-[var(--color-section)] text-_step1"
+                    className="hover:text-yellowColor text-_step1"
                   >
                     Código <IconGithub size="24" />
                   </Link>
                 )}
               </div>
             </div>
-            <figure class="cover w-full max-w-md max-h-96">
+            <figure class="cover w-full max-w-md max-h-96 aspect-square">
               {isLocalAsset(projectImage) && images[projectImage] ? (
                 <Image
                   src={images[projectImage].default}
