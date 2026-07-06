@@ -85,7 +85,7 @@ const resolvedImages = images?.map((img: any) => ({
     <div class="cover w-full max-w-lg aspect-video">
       <!-- <img src={image} alt={title} transition:name={`image-project-${title}`} /> -->
       <Image
-        src={image}
+        src={localImages[image].default}
         alt={title}
         transition:name={`image-project-${title}`}
         width={1280}
