@@ -7,6 +7,7 @@ import Link from "../../components/ui/Link.astro";
 import IconGoToPage from "../../Icons/IconGoToPage.astro";
 import IconGithub from "../../Icons/IconGithub.astro";
 import GalleryMasonry from "../../components/ui/GalleryMasonry.astro";
+import { Image } from "astro:assets";
 
 export const getStaticPaths = (async () => {
   const projects = await getCollection("projects");
@@ -81,8 +82,16 @@ const resolvedImages = images?.map((img: any) => ({
         }
       </footer>
     </div>
-    <div class="cover w-full max-w-lg bg-red-200">
-      <img src={image} alt={title} transition:name={`image-project-${title}`} />
+    <div class="cover w-full max-w-lg aspect-video">
+      <!-- <img src={image} alt={title} transition:name={`image-project-${title}`} /> -->
+      <Image
+        src={image}
+        alt={title}
+        transition:name={`image-project-${title}`}
+        width={1280}
+        height={720}
+        class="rounded-md w-full h-full object-cover"
+      />
     </div>
   </article>
   <GalleryMasonry images={resolvedImages} />
