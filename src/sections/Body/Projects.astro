@@ -15,6 +15,11 @@ const localImages = import.meta.glob<{ default: ImageMetadata }>(
   { eager: true },
 );
 
+const orderGeneralProjects = [...generalProjects].sort((a, b) => {
+  if (a.data.dev === b.data.dev) return 0;
+  return a.data.dev ? 1 : -1;
+});
+
 function resolveImage(path: string) {
   if (path.startsWith("/src/assets/")) {
     const found = localImages[path];
@@ -30,7 +35,7 @@ function resolveImage(path: string) {
   <p>Estos son algunos de mis proyectos personales que he desarrollado.</p>
   <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
     {
-      generalProjects.map((project) => {
+      orderGeneralProjects.map((project) => {
         return (
           <CardProject
             {...project.data}

@@ -4,7 +4,7 @@ category: "general"
 title: "Censao"
 description: "Censao es un proyecto que gestiona fichas médicas para un centro de salud, registra tratamientos y consultas, y realiza un seguimiento a los pacientes."
 url: "https://censao-nr.vercel.app/"
-image: "/src/assets/images/censao/1.png"
+image: "/src/assets/images/censao/censao.png"
 code: "https://github.com/ignaccio7/censao.git"
 images:
   - src: "/src/assets/images/censao/1.png"
