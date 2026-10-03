@@ -7,7 +7,8 @@ import Link from "../../components/ui/Link.astro";
 import IconGoToPage from "../../Icons/IconGoToPage.astro";
 import IconGithub from "../../Icons/IconGithub.astro";
 import GalleryMasonry from "../../components/ui/GalleryMasonry.astro";
-import { Image } from "astro:assets";
+import { Image, getImage } from "astro:assets";
+import { resolveVideo } from "../../utils/index";
 
 export const getStaticPaths = (async () => {
   const projects = await getCollection("projects");
@@ -23,18 +24,19 @@ export const getStaticPaths = (async () => {
   });
 }) satisfies GetStaticPaths;
 
-const { title, description, image, url, code, images } = Astro.props;
+const { title, description, image, video, url, code, images } = Astro.props;
 
 const localImages = import.meta.glob<{ default: ImageMetadata }>(
   "/src/assets/images/**/*.{jpg,jpeg,png,webp,svg}",
   { eager: true },
 );
 
-function resolveImage(path: string) {
+function resolveImage(path: string): ImageMetadata | string {
   if (path.startsWith("/src/assets/")) {
     const found = localImages[path];
     if (!found) throw new Error(`Image ${path} not found in assets folder.`);
     return found.default; // objeto ImageMetadata real
+    // return found.default.src; // URL remota, se queda como string
   }
   return path; // URL remota, se queda como string
 }
@@ -44,8 +46,19 @@ const resolvedImages = images?.map((img: any) => ({
   src: resolveImage(img.src),
 }));
 
+const posterAsset = resolveImage(image);
+const optimizedPoster = await getImage({
+  src: posterAsset as ImageMetadata,
+  width: 720,
+  height: 405,
+  format: "webp",
+});
+
 // console.log(title);
 // console.log(images);
+
+console.log("video del frontmatter:", video);
+console.log("URL resuelta:", resolveVideo(video));
 ---
 
 <Layout>
@@ -82,17 +95,146 @@ const resolvedImages = images?.map((img: any) => ({
         }
       </footer>
     </div>
-    <div class="cover w-full max-w-lg aspect-video">
+    <div class="cover w-full max-w-lg aspect-video rounded-md overflow-hidden">
       <!-- <img src={image} alt={title} transition:name={`image-project-${title}`} /> -->
-      <Image
-        src={resolveImage(image) as any}
-        alt={title}
-        transition:name={`image-project-${title}`}
-        width={1280}
-        height={720}
-        class="rounded-md w-full h-full object-cover"
-      />
+      {
+        !video ? (
+          <Image
+            src={resolveImage(image) as string}
+            alt={title}
+            transition:name={`image-project-${title}`}
+            width={1280}
+            height={720}
+            class="w-full h-full object-cover object-left-top"
+          />
+        ) : (
+          <div class="relative w-full h-full overflow-hidden">
+            <video
+              data-project-video
+              poster={optimizedPoster.src}
+              src={resolveVideo(video) as string}
+              autoplay
+              muted
+              loop
+              controls
+              playsinline
+              preload="auto"
+              class="w-full h-full object-cover object-top"
+            />
+            {/* <div
+              data-video-loader
+              class="loader w-full flex flex-col pt-4 gap-1 items-center absolute bottom-0 inset-x-0 z-10 bg-gradient-to-t from-black/50 to-transparent transition-opacity duration-300"
+            >
+              <p class="text-_step2 text-gray-100 w-full flex flex-row gap-2 justify-between px-2">
+                <span>Cargando video...</span>
+                <span data-video-percent>0%</span>
+              </p>
+              <progress
+                data-video-progress
+                max="100"
+                value="0"
+                class="h-1 rounded-sm w-full"
+              />
+            </div> */}
+          </div>
+        )
+      }
     </div>
   </article>
   <GalleryMasonry images={resolvedImages} />
 </Layout>
+
+<style>
+  [data-video-progress] {
+  }
+  /* Color de fondo de la barra (la pista vacía) */
+  [data-video-progress]::-webkit-progress-bar {
+    background-color: var(--color-gray-dark); /* Gris claro (ej. gray-200) */
+  }
+  /* Color del progreso (el relleno rojo) */
+  [data-video-progress]::-webkit-progress-value {
+    background-color: var(--color-body); /* Rojo red-500 */
+  }
+  /* Para Firefox */
+  [data-video-progress]::-moz-progress-bar {
+    background-color: var(--color-body);
+  }
+</style>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const $video = document.querySelector(
+      "[data-project-video]",
+    ) as HTMLVideoElement | null;
+    if (!$video) return;
+    if ($video.readyState === 0) {
+      $video.load();
+    }
+
+    $video.addEventListener("canplay", () => {
+      $video.play().catch((e) => {
+        console.log("Error al reproducir el video:", e);
+      });
+    });
+  });
+</script>
+
+<!-- <script>
+  const $ = (selector: string, context: Document | HTMLElement = document) =>
+    context.querySelector(selector);
+  const $$ = (selector: string, context: Document | HTMLElement = document) =>
+    context.querySelectorAll(selector);
+
+  document.addEventListener("astro:page-load", () => {
+    const $video = $("[data-project-video]") as HTMLVideoElement | null;
+    const $loader = $("[data-video-loader]") as HTMLElement | null;
+    const $progress = $("[data-video-progress]") as HTMLProgressElement | null;
+    const $percent = $("[data-video-percent]") as HTMLElement | null;
+
+    if (!$video || !$loader || !$progress || !$percent) return;
+
+    const durationVideo = $video.duration;
+
+    if ($video.readyState === 0) {
+      console.log("cargando");
+      $video.load();
+    }
+
+    $video.addEventListener("playing", () => {
+      console.log("Reproduciendo");
+      $loader.style.opacity = "0";
+      setTimeout(() => {
+        $loader.style.display = "hidden";
+      }, 300);
+    });
+
+    $video.addEventListener("waiting", () => {
+      console.log("Cargando");
+      $loader.style.opacity = "1";
+      setTimeout(() => {
+        $loader.style.display = "flex";
+      }, 300);
+    });
+
+    if ($video.readyState === 4) {
+      $loader.style.opacity = "0";
+    }
+
+    $video.addEventListener("progress", (event) => {
+      console.log($video.duration);
+      console.log($video.buffered.end($video.buffered.length - 1));
+      const loadingBuffer = Math.round(
+        ($video.buffered.end($video.buffered.length - 1) / durationVideo) * 100,
+      ).toString();
+      $percent.textContent = `${loadingBuffer}%`;
+      $progress.setAttribute("value", loadingBuffer);
+    });
+
+    $video.addEventListener("canplay", () => {
+      console.log("Puede reproducir");
+      $video.play().catch((e) => {
+        console.log("Error al reproducir el vieo");
+      });
+    });
+  });
+</script> -->

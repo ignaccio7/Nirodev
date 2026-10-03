@@ -6,6 +6,7 @@ description: "Esta es sitio web para una empresa comprometida en proporcionar se
 url: "https://bimetica.com.bo/"
 image: "https://github.com/ignaccio7/nirodev/blob/master/public/projects/bimetica.png?raw=true"
 code: ""
+video: "/src/assets/images/bimetica/bimetica.mp4"
 images:
   - src: "/src/assets/images/bimetica/1.png"
     alt: "Imagen 1"
